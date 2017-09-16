@@ -11,3 +11,28 @@ function [part] = make_xval_partition(n, n_folds)
 % of the i'th data point.
 
 % YOUR CODE GOES HERE
+
+size_fold = zeros(n_folds,1);  % empty vector of fold sizes
+nDat = n;
+
+% fill vector of fold sizes
+for i =  1:n_folds 
+    size = floor(nDat / (n_folds - i + 1)) ;  % divide number of vectors by remaining folds
+    size_fold(i) = size ;
+    nDat = nDat - size ;  % updated number of vectors
+end
+
+part = zeros(n,1) ;
+ind = 1 ;
+
+% get indices of datapoints
+for j = 1:n_folds
+    size_ind = size_fold(j) ;
+    part(ind : ind + size_ind - 1) = j ;
+    ind = ind + size_ind ;
+end
+
+part = part(randperm(length(part))) ;
+
+
+
