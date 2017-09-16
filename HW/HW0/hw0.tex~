@@ -1,0 +1,65 @@
+\documentclass[english]{article}
+\usepackage{hyperref}
+\title{CIS 520, Machine Learning, Fall 2017 \\ Homework 0\\
+Due: Friday, September 8th, 11:59pm \\ Submit PDF to Canvas}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-30pt}
+\subsection*{Collaboration Policy} 
+
+You are allowed and encouraged to work together. You may discuss the
+homework to understand the problem and reach a solution in groups up
+to size {\bf four students.} However, {\em each student must write
+  down the solution independently, and without referring to written
+  notes from the joint session. {\bf In addition, each student must
+    write on their solutions the names of people with whom they
+    collaborated.}} You must understand the solution well enough 
+to reconstruct it by yourself. (This is for your own benefit:
+you have to take the exams alone.)
+
+{\bf Coding assignments, unless otherwise specified, may be done
+  collaboratively in teams of two (or individually)}. Teams should
+submit a single codebase that clearly specifies the two
+authors' names according to the assignment instructions.
+
+\subsection*{Homework Related Questions}
+If you have questions about how to approach a homework problem, you
+should go to one of the many scheduled instructor/TA office hours, or post your question to Piazza. 
+{\bf All questions MUST be directed to Piazza. If you send us an email, the only response you will receive is "Please post to Piazza." } If you choose, Piazza allows for you to post either anonymously or to the instructors privately.
+
+Please refrain from posting solutions or code snippets publicly in Piazza. If you want us to review your code, please make the question private.
+
+\subsection*{Plagiarism Policy}
+When taking phrases or facts from any source (books,
+articles, or the web), be sure to acknowledge where the information
+was taken from.  Any text quoted directly must be enclosed in
+quotation marks, again with the source noted.  The format of the
+citation does not matter, as long as it is sufficiently detailed for
+us to find the original source.
+
+We will run homeworks through plagiarism detection software, and the graders will be alert for cases of copied homework.
+{\bf Do not share you code or written solutions  with friends to ``let them look at it''. If they include a piece of your
+homework in their submission and it is caught, you are {\it not} doing them a favor.}
+
+Suspected violations will be reported to the Office of Student Conduct
+for investigation and possible disciplinary action. We will not
+contact you before reporting, but we will let you know that we have
+done so.
+
+\subsection*{Homework Submission Instructions}
+
+All written homework {\bf must} be submitted as a PDF to Canvas. {\bf
+  Handwritten assignments (scanned or otherwise) will not be
+  accepted.}  We strongly encourage (if not require) the use of \LaTeX
+to generate your final PDF. We will be posting the homeworks in both
+PDF and \LaTeX source form, and we encourage you to use this source as
+a template for your submission.
+
+\subsection*{Student Agreement}
+I have read the above policies and agree to abide by them
+\\ \\
+Student Name: \underline{\textless TYPE YOUR NAME HERE\textgreater}
+
+\end{document}

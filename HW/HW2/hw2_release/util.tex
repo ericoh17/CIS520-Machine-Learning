@@ -1,0 +1,201 @@
+%\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[letterpaper]{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+\usepackage{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{latexsym}
+\usepackage{xspace}
+\usepackage{pdflscape}
+\usepackage[hyphens]{url}
+\usepackage[colorlinks]{hyperref}
+\usepackage{enumerate}
+\usepackage{ifthen}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{multirow} 
+\usetikzlibrary{shapes}
+\usepackage{algorithm2e}
+\usepackage{listings}
+%%%% HW instructions / collaboration text
+
+\newcommand{\HWPoliciesmix}{
+\paragraph*{Instructions.} {\bf This homework contains two parts. Part A is written assignment and Part B is MATLAB programming assignment.}
+}
+
+\newcommand{\HWPolicies}{
+\paragraph*{Instructions.} 
+Please write up your responses to the following problems clearly and
+concisely. We encourage you to write up your responses using \LaTeX{};
+we have provided a \LaTeX{} template, available on Canvas, to
+make this easier. {\bf Submit your answers in PDF form to Canvas. We will not accept paper copies of the homework.}
+
+\paragraph*{Collaboration.} 
+You are allowed and encouraged to work together. You may discuss the
+homework to understand the problem and reach a solution in groups up
+to size {\bf two students.} However, {\em each student must write
+  down the solution independently, and without referring to written
+  notes from the joint session. {\bf In addition, each student must
+    write on the problem set the names of the people with whom you
+    collaborated.}} You must understand the solution well enough in
+order to reconstruct it by yourself. (This is for your own benefit:
+you have to take the exams alone.)
+}
+\newcommand{\ProgrammingPolicies}[1]{
+\paragraph*{Instructions.} 
+This is a MATLAB programming assignment. This assignment consists of
+multiple parts. Portions of each part will be graded automatically,
+and you can submit your code to be automatically checked for
+correctness to receive feedback ahead of time.
+
+We are providing you with the codebase, templates, and dataset that you will
+need for this assignment. Download the file {\tt hw#1\_kit.zip}
+from Canvas {\bf before} beginning the assignment.  {\bf Please
+  read through the documentation provided in ALL Matlab files before
+  starting the assignment.} 
+
+Note that you will submit a pdf with your answers to canvas, and will submit (and run) your matlab
+code (and get feedback on it) as described on the wiki:
+
+\begin{center}
+\url{http://alliance.seas.upenn.edu/~cis520/wiki/index.php?n=Resources.HomeworkSubmission}
+\end{center}
+
+If you are not familiar with Matlab or how Matlab functions work, you can refer to Matlab online documentation for help:
+\begin{center}
+\url{http://www.mathworks.com/help/matlab/}
+\end{center}
+
+In addition, please use built-in Matlab functions rather than external
+library functions. Without proper reference to an external library,
+the auto-grader may fail even if your code runs perfectly on your local
+machine. Also, please DO NOT include data files in your submission.
+
+\paragraph*{Collaboration.} 
+You are allowed and encouraged to work together. You may discuss the
+homework to understand the problem and reach a solution in groups up
+to size {\bf two students.} Please submit {\bf one copy} of your work. Be sure to include {\bf your and your collaborator's} pennkey and name in the {\bf group.txt} file. {\bf We will be using automatic checking software to detect blatant copying of other groups' assignments, so,
+please, don't do it.}
+}
+
+%%%% CUSTOM COMMANDS FOR FORMATTING EXAMS/HOMEWORKS
+\newcounter{section_points}[section]
+\newcounter{header_points}[section]
+\newcounter{total_points}
+
+\newcommand{\hpoints}[1]{
+  \setcounter{header_points}{#1}
+  \textbf{[#1 points]}
+}
+
+\newcommand{\points}[1]{
+  \addtocounter{section_points}{#1}
+  \addtocounter{total_points}{#1}
+  \textbf{[#1 
+    \ifthenelse{\equal{#1}{1}}
+    {point}{points}]}
+}
+
+\newcommand{\bpoints}[1]{
+  \textbf{[#1 
+    \ifthenelse{\equal{#1}{1}}
+    {point}{points}]}
+}
+
+
+\newcommand{\point}{\textbf{[1 point]}}
+
+\newboolean{ShowSolutions}
+\newcommand{\Mistake}[2]{
+  \ifthenelse{\boolean{ShowSolutions}}
+  {\paragraph{\bf $\blacksquare$ COMMON MISTAKE #1:} {\sf #2} \bigskip}
+  {}
+}
+
+\newcommand{\Solution}[2]{
+  \ifthenelse{\boolean{ShowSolutions}}
+    {
+      \paragraph{\bf $\bigstar $ SOLUTION:} { \sf
+        #1} \bigskip
+    }
+    { 
+      #2
+    } %} \vspace{1.5in}}
+}
+\newcommand{\out}[1]{}
+
+\newboolean{ShowPointsInfo}
+
+\newcommand{\PointStats}[0]{
+  \ifthenelse{\boolean{ShowPointsInfo}}
+  {
+    \begin{center}
+
+      \begin{tabular}{rl}
+        \hline
+        Stated Points: & \arabic{header_points} \\
+        Section Points: & \arabic{section_points} \\
+        Total Points So Far: & \arabic{total_points} \\
+        \hline 
+        \multicolumn{2}{c}{
+          
+          \ifthenelse{
+            \equal{\value{section_points}}{\value{header_points}}
+          }{CORRECT TOTAL}
+          {{\bf INCORRECT TOTAL}}
+          }
+          \\
+        \hline
+      \end{tabular}
+    \end{center}
+  }{}
+}
+
+\newcounter{blankcount}
+\newcommand{\myrepeat}[2] {
+\setcounter{blankcount}{1}
+\whiledo{\value{blankcount} < #1}{
+#2
+\addtocounter{blankcount}{1}
+}
+}
+
+\newcommand{\blank}[1]{\underline{\myrepeat{#1}{\qquad}}}
+
+
+%%%% CUSTOM MATH GOES HERE
+
+\newcommand{\ind}[1]{\mathbf{1}\left(#1\right)}
+\renewcommand{\Pr}{\mathbf{Pr}\xspace}
+\newcommand{\Bern}{\textsf{Bernoulli}\xspace}
+\newcommand{\sign}{\textsf{sign}}
+
+\newcommand{\E}{\mathbf{E}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\bl}{\mathbf{\ell}}
+\newcommand{\vc}[1]{\mathbf{#1}}
+
+\newcommand{\Hypo}{\mathcal{H}}
+\newcommand{\XX}{\mathcal{X}}
+\newcommand{\cD}{\mathcal{D}}
+
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+\newcommand{\argmin}{\operatornamewithlimits{argmin}}
+
+\newcolumntype{M}{>{$\vcenter\bgroup\hbox\bgroup}c<{\egroup\egroup$}}
+
+\newcolumntype{x}[1]{>{\centering\arraybackslash}m{#1}}
+
+
+
+
