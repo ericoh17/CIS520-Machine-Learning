@@ -14,8 +14,12 @@ function labels = k_nearest_neighbours(Xtrain,Ytrain,Xtest,K,distfunc)
     % distfunc: distance function to be used - l1, l2, linf.
     % labels : return an M x 1 vector of predicted labels for testing data.
     
+    num_train = size(Xtrain, 1) ;
     num_test = size(Xtest, 1) ;
     labels = zeros(num_test, 1) ;  % empty vector for labels
+    
+    assert((K > 0) && (K < num_train + 1), "K must be between 1 and ...
+    	number of training examples") ;
     
     for test = 1:num_test
         test_point = Xtest(test,:) ;
@@ -32,9 +36,9 @@ function labels = k_nearest_neighbours(Xtrain,Ytrain,Xtest,K,distfunc)
         [dist_sort, index_sort] = sort(test_dist) ; 
         
         k_nn_ind = index_sort(1 : K) ;  % get indices of k nearest neighbors
-        k_nn = Ytrain(k_nn_ind,:) ;  % get y values for k NN
+        k_nn = Ytrain(k_nn_ind) ;  % get y values for k NN
         
-        if mean(k_nn) >= 0.5 
+        if mean(k_nn) >= 0.5  % if tied, predict 1
             labels(test) = 1 ;
         else 
             labels(test) = 0 ;

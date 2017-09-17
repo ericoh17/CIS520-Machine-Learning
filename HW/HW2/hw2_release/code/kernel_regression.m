@@ -16,13 +16,16 @@ function labels = kernel_regression(Xtrain,Ytrain,Xtest,sigma)
     num_test = size(Xtest, 1) ;
     labels = zeros(num_test, 1) ;  % empty vector for labels
     
-    scale = 1 / (2 * sigma^2) ; 
+    scale = 1 / (2 * sigma^2) ;  
     
     for test = 1:num_test
         test_point = Xtest(test,:) ;
         
-        kern = exp(-scale * (bsxfun(@minus, Xtrain, test_point).^2)) ;
-        weight_kern = sum(kern .* y) ;
+        % calculate L2 distance
+        dist = sqrt(sum(bsxfun(@minus, Xtrain, test_point).^2, 2)) ;
+        
+        kern = exp(-scale * (dist).^2) ;
+        weight_kern = sum(kern .* Ytrain) ;
         
         if mode(sign(weight_kern)) == -1
             labels(test) = 0 ;  % set label to 0 to switch back from -1
