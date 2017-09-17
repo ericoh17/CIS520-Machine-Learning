@@ -14,27 +14,30 @@ function labels = k_nearest_neighbours(Xtrain,Ytrain,Xtest,K,distfunc)
     % distfunc: distance function to be used - l1, l2, linf.
     % labels : return an M x 1 vector of predicted labels for testing data.
     
-    % YOUR CODE GOES HERE.
-    
-    num_train = size(Xtrain, 1) ;
     num_test = size(Xtest, 1) ;
-    
-    labels = zeros(num_test, 1) ;
+    labels = zeros(num_test, 1) ;  % empty vector for labels
     
     for test = 1:num_test
         test_point = Xtest(test,:) ;
-        test_dists = zeros(num_train, 1) ; 
         
         if distfunc == "l1"
-            test_dist(test) = sum(abs(bsxfun(@minus, Xtrain, test_point)), 2) ;
+            test_dist = sum(abs(bsxfun(@minus, Xtrain, test_point)), 2) ;
         elseif distfunc == "l2"
-            test_dist(test) = sqrt(sum(bsxfun(@minus, Xtrain, test_point).^2, 2)) ;
+            test_dist = sqrt(sum(bsxfun(@minus, Xtrain, test_point).^2, 2)) ;
         elseif distfunc == "linf"
-            test_dist(test) = max(abs(bsxfun(@minus, Xtrain, test_point)), [], 2) ;
+            test_dist = max(abs(bsxfun(@minus, Xtrain, test_point)), [], 2) ;
         end
         
-        dist_sort = sort(test_dist) ; 
-        k_nn = dist_sort(1 : K) ; 
+        % sort distances sin increasing order and get index of original spot in Xtrain
+        [dist_sort, index_sort] = sort(test_dist) ; 
+        
+        k_nn_ind = index_sort(1 : K) ;  % get indices of k nearest neighbors
+        k_nn = Ytrain(k_nn_ind,:) ;  % get y values for k NN
+        
+        if mean(k_nn) >= 0.5 
+            labels(test) = 1 ;
+        else 
+            labels(test) = 0 ;
     end
 end
 
