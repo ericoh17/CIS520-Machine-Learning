@@ -18,18 +18,19 @@ function labels = k_nearest_neighbours(Xtrain,Ytrain,Xtest,K,distfunc)
     num_test = size(Xtest, 1) ;
     labels = zeros(num_test, 1) ;  % empty vector for labels
     
-    assert((K > 0) && (K < num_train + 1), "K must be between 1 and ...
-    	number of training examples") ;
+    assert((K > 0) && (K < num_train + 1), 'Set 1 < K <= n') ;
     
     for test = 1:num_test
         test_point = Xtest(test,:) ;
         
-        if distfunc == "l1"
+        if strcmp(distfunc,'l1') == 1
             test_dist = sum(abs(bsxfun(@minus, Xtrain, test_point)), 2) ;
-        elseif distfunc == "l2"
+        elseif strcmp(distfunc,'l2') == 1
             test_dist = sqrt(sum(bsxfun(@minus, Xtrain, test_point).^2, 2)) ;
-        elseif distfunc == "linf"
+        elseif strcmp(distfunc,'linf') == 1
             test_dist = max(abs(bsxfun(@minus, Xtrain, test_point)), [], 2) ;
+        else 
+            error('Unrecognized distance function') ;
         end
         
         % sort distances sin increasing order and get index of original spot in Xtrain
@@ -42,6 +43,7 @@ function labels = k_nearest_neighbours(Xtrain,Ytrain,Xtest,K,distfunc)
             labels(test) = 1 ;
         else 
             labels(test) = 0 ;
+        end
     end
 end
 

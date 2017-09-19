@@ -31,7 +31,7 @@ for i = 1:N
     Ytest = Y(ind_test) ;
     
     % get predicted labels
-    labels = k_nearest_neighbours(Xtrain, Ytrain, Xtest, K, distfunc) ;
+    labels = k_nearest_neighbours(Xtrain, Ytrain, Xtest, K, distFunc) ;
     
     % calculate error for ith fold
     error_mat(i) = mean(labels ~= Ytest) ;

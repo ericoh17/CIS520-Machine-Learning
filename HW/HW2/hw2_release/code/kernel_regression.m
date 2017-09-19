@@ -11,8 +11,6 @@ function labels = kernel_regression(Xtrain,Ytrain,Xtest,sigma)
     % sigma : width of the (gaussian) kernel.
     % labels : return an M x 1 vector of predicted labels for testing data.
     
-    Ytrain(Ytrain == 0) = -1 ; % set 0 to -1 for convenience
-    
     num_test = size(Xtest, 1) ;
     labels = zeros(num_test, 1) ;  % empty vector for labels
     
@@ -27,9 +25,10 @@ function labels = kernel_regression(Xtrain,Ytrain,Xtest,sigma)
         kern = exp(-scale * (dist).^2) ;
         weight_kern = sum(kern .* Ytrain) ;
         
-        if mode(sign(weight_kern)) == -1
-            labels(test) = 0 ;  % set label to 0 to switch back from -1
+        if weight_kern < 0.5
+            labels(test) = 0 ; 
         else 
             labels(test) = 1 ;
+        end
     end
 end

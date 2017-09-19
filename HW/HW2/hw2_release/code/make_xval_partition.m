@@ -13,7 +13,8 @@ function [part] = make_xval_partition(n, n_folds)
 % YOUR CODE GOES HERE
 
 % set seed
-rng(893) ;
+set_rng = randsample(100000, 1) ; 
+rng(set_rng) ;
 
 size_fold = zeros(n_folds,1);  % empty vector of fold sizes
 nDat = n;
