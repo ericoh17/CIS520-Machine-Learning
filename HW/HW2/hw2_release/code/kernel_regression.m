@@ -12,9 +12,7 @@ function labels = kernel_regression(Xtrain,Ytrain,Xtest,sigma)
     % labels : return an M x 1 vector of predicted labels for testing data.
     
     num_test = size(Xtest, 1) ;
-    labels = zeros(num_test, 1) ;  % empty vector for labels
-    
-    scale = 1 / (2 * sigma^2) ;  
+    labels = zeros(num_test, 1) ;  % empty vector for labels 
     
     for test = 1:num_test
         test_point = Xtest(test,:) ;
@@ -22,13 +20,13 @@ function labels = kernel_regression(Xtrain,Ytrain,Xtest,sigma)
         % calculate L2 distance
         dist = sqrt(sum(bsxfun(@minus, Xtrain, test_point).^2, 2)) ;
         
-        kern = exp(-scale * (dist).^2) ;
-        weight_kern = sum(kern .* Ytrain) ;
+        kern = exp(-dist.^2/sigma.^2) ;
+        weight_kern = sum(kern .* Ytrain)/sum(kern) ;
         
-        if weight_kern < 0.5
-            labels(test) = 0 ; 
-        else 
+        if weight_kern >= 0.5 
             labels(test) = 1 ;
+        else 
+            labels(test) = 0 ;
         end
     end
 end

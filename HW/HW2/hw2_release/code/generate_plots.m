@@ -5,11 +5,11 @@
 % with your code.
 
 % Loading the data: this loads X, and Ytrain.
-load('../data/X.mat'); % change this to X_noisy if you want to run the code on the noisy data
+load('../data/X_noisy.mat'); % change this to X_noisy if you want to run the code on the noisy data
 load('../data/Y.mat'); 
 
 % if using noisy dataset
-%X = X_noisy ; 
+X = X_noisy ; 
 
 % split data into 450 training and 150 testing points
 N_total = size(X,1) ;
@@ -75,6 +75,7 @@ title('Original data, KNN, N = [2,4,8,16]');
 xlabel('N');
 ylabel('Error');
 legend('N-Fold Error','Test Error');
+ylim([0.019,0.055]) ;
 %print -deps knn_OG_varyN ;
 %print -deps knn_noisy_varyN ;
 hold off;
@@ -85,12 +86,12 @@ errorbar(x, y, e);
 hold on;
 y = mean(errors_test_kern); e = std(errors_test_kern); x = [2,4,8,16]; % <- computes mean across all trials
 errorbar(x, y, e);
-title('Original data, Kernel Regression, N = [2,4,8,16]');
-%title('Noisy data, Kernel Regression, N = [2,4,8,16]');
+%title('Original data, Kernel Regression, N = [2,4,8,16]');
+title('Noisy data, Kernel Regression, N = [2,4,8,16]');
 xlabel('N');
 ylabel('Error');
 legend('N-Fold Error','Test Error');
-ylim([0.30, 0.35]) ;
+%ylim([0.019, 0.055]) ;
 %print -deps kern_OG_varyN ;
 %print -deps kern_noisy_varyN ;
 hold off;
@@ -159,8 +160,8 @@ errorbar(x, y, e);
 hold on;
 y = mean(errors_test_kern); e = std(errors_test_kern); x = 1:12 ; % <- computes mean across all trials
 errorbar(x, y, e);
-title('Original data, Kernel Regression, Sigma = 1-12');
-%title('Noisy data, Kernel Regression, Sigma = 1-12');
+%title('Original data, Kernel Regression, Sigma = 1-12');
+title('Noisy data, Kernel Regression, Sigma = 1-12');
 xlabel('Sigma');
 ylabel('Error');
 legend('10-Fold Error','Test Error');
