@@ -2,12 +2,15 @@
 
 \input{util}
 
+\usepackage{float}
+
 %% WHETHER OR NOT SOLUTIONS ARE ENABLED %%
 \setboolean{ShowSolutions}{false}
 \setboolean{ShowPointsInfo}{true}
 
 \title{CIS 520, Machine Learning, Fall 2017: Assignment 2\\
 Due: Monday, September 25th, 11:59pm (via turnin for all codes)
+\author{Eric Oh, Jiarui Lu}
 \ifthenelse{\boolean{ShowSolutions}}{ \\ \bf Solutions }{} }
 \date{}
 
@@ -78,19 +81,34 @@ noisy datasets by answering the following questions. You will be given a dataset
 
  
  \paragraph{Your answer:}
- ~\\
+ ~\\ 
  
- {\tt  [Figure on original data with KNN]}
- \\    
+Original data with KNN
+\begin{figure}[H]
+\centering
+\includegraphics[width=7in, height=3in]{knn_OG_varyN.png}
+\end{figure}
  
- {\tt [Figure on noisy data with KNN]}
- \\
+Noisy data with KNN
+\begin{figure}[H]
+\centering
+\includegraphics[width=7in, height=3in]{knn_noisy_varyN.png}
+\end{figure}
+ 
+Original data with Kernel Regression
+\begin{figure}[H]
+\centering
+\includegraphics[width=7in, height=3in]{kern_OG_varyN.png}
+\end{figure}
 
-  {\tt  [Figure on original data with Kernel Regression]}
- \\    
- 
-  {\tt  [Figure on noisy data with Kernel Regression]}
- \\    
+Noisy data with Kernel Regression
+\begin{figure}[H]
+\centering
+\includegraphics[width=7in,height=3in]{kern_noisy_varyN.png}
+\end{figure}
+
+In general, we observe that as $N$ increases, the training error decreases as we would expect. For KNN in both the original and noisy datasets, the test error is lower than that of the training error, suggesting that there is not much overfitting. For Kernel Regression, the noisy dataset results in higher test error than training error, suggesting that we might be overfitting to noise. 
+
  
 \item For both the original and the noisy data, compute the
   10-fold cross validation error on the training set and the corresponding test error for K-NN with
@@ -105,20 +123,32 @@ noisy datasets by answering the following questions. You will be given a dataset
   
 \paragraph{Your answer:}
  ~\\
- 
- {\tt  [Figure on original data with KNN]}
- \\    
- 
- {\tt [Figure on noisy data with KNN]}
- \\
 
-  {\tt  [Figure on original data with Kernel Regression]}
- \\    
+Original data with KNN
+\begin{figure}[H]
+\centering
+\includegraphics[width=7in, height=3in]{knn_OG_varyK.png}
+\end{figure}
+
+Noisy data with KNN
+\begin{figure}[H]
+\centering
+\includegraphics[width=7in, height=3in]{knn_noisy_varyK.png}
+\end{figure}
+
+Original data with Kernel Regression
+\begin{figure}[H]
+\centering
+\includegraphics[width=7in, height=3in]{kern_OG_varySIGMA.png}
+\end{figure}
+
+Noisy data with Kernel Regression
+\begin{figure}[H]
+\centering
+\includegraphics[width=7in, height=3in]{kern_noisy_varySIGMA.png}
+\end{figure}
  
-  {\tt  [Figure on noisy data with Kernel Regression]}
- \\    
- 
- The best $\sigma$ is  \ldots, the best $K$ is \ldots  .
+ The best $\sigma$ for the original data is 3, the best $\sigma$ for the noisy data is 9, the best $K$ for the original data is 2, and the best $K$ for the noisy data is 3.
 
 
 \end{itemize}
@@ -197,10 +227,10 @@ We also provide you a decision tree tool in the code.
 \centering
 \begin{tabular}{|c|c|c|c|c|c|} \hline
 &training error on $X$& testing error on $X$&training error on $X_{\text noisy}$&testing error on $X_{\text noisy}$\\ \hline
-K-NN&&&&\\ \hline
-Kernel Regression &&&&\\ \hline
-Decision Tree&&&& \\ \hline
-Logistic Regression &&&&\\ \hline
+K-NN & 0.0244 & 0.0467 & 0.2222 & 0.2267 \\ \hline
+Kernel Regression & 0.0356 & 0.0400 & 0.1733 & 0.1733 \\ \hline
+Decision Tree & & & & \\ \hline
+Logistic Regression & & & & \\ \hline
 \end{tabular}
 \end{table} 
 
