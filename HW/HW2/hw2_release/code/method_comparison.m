@@ -24,7 +24,7 @@ distfunc = 'l2' ;
 
 % set method parameters
 fold = 10 ;
-K = 3 ; % change to 3 for noisy data
+K = 34 ; % change to 34 for noisy data
 sigma = 9 ; % change to 9 for noisy data
 
 % get partitions for cross-validation

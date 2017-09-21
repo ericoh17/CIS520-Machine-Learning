@@ -11,19 +11,7 @@ load('../data/Y.mat');
 % if using noisy dataset
 X = X_noisy ; 
 
-% split data into 450 training and 150 testing points
 N_total = size(X,1) ;
-
-tf = false(N_total, 1) ;
-tf(1:450) = true ;
-tf = tf(randperm(N_total)) ;
-
-Xtrain = X(tf, :) ;
-Xtest = X(~tf, :) ;
-Ytrain = Y(tf) ;
-Ytest = Y(~tf) ;
-
-N = size(Xtrain, 1) ; 
 distfunc = 'l2' ; 
 
 %%%% PLOT ERRORS FOR FIXED K AND SIGMA AND VARY FOLD NUM %%%
@@ -44,10 +32,24 @@ sigma = 1 ;
 
 for trial = 1:100
     
+    % set rng so that each partition is random
+    set_rng = randsample(100000, 1) ; 
+    rng(set_rng) ;
+    
+    % split data into 450 training and 150 testing examples
+    tf = false(N_total, 1) ;
+    tf(1:450) = true ;
+    tf = tf(randperm(N_total)) ;
+
+    Xtrain = X(tf, :) ;
+    Xtest = X(~tf, :) ;
+    Ytrain = Y(tf) ;
+    Ytest = Y(~tf) ;
+    
     % obtain cross-validation errors
     for i = 1:num_fold
         fold = fold_vec(i) ;
-        part = make_xval_partition(N, fold) ;
+        part = make_xval_partition(size(Xtrain,1), fold) ;
         
         errors_xval_knn(trial, i) = knn_xval_error(Xtrain, Ytrain, K, part, distfunc) ;
         errors_xval_kern(trial, i) = kernreg_xval_error(Xtrain, Ytrain, sigma, part) ;
@@ -70,12 +72,12 @@ errorbar(x, y, e);
 hold on;
 y = mean(errors_test_knn); e = std(errors_test_knn); x = [2,4,8,16]; % <- computes mean across all trials
 errorbar(x, y, e);
-title('Original data, KNN, N = [2,4,8,16]');
-%title('Noisy data, KNN,  N = [2,4,8,16]');
+%title('Original data, KNN, N = [2,4,8,16]');
+title('Noisy data, KNN,  N = [2,4,8,16]');
 xlabel('N');
 ylabel('Error');
 legend('N-Fold Error','Test Error');
-ylim([0.019,0.055]) ;
+%ylim([0.019,0.055]) ;
 %print -deps knn_OG_varyN ;
 %print -deps knn_noisy_varyN ;
 hold off;
@@ -117,7 +119,21 @@ errors_test_kern = zeros(100, num_sig) ;
 
 for trial = 1:100
     
-    part = make_xval_partition(N, num_fold) ;
+    % set rng so that each partition is random
+    set_rng = randsample(100000, 1) ; 
+    rng(set_rng) ;
+    
+    % split data into 450 training and 150 testing examples
+    tf = false(N_total, 1) ;
+    tf(1:450) = true ;
+    tf = tf(randperm(N_total)) ;
+
+    Xtrain = X(tf, :) ;
+    Xtest = X(~tf, :) ;
+    Ytrain = Y(tf) ;
+    Ytest = Y(~tf) ;
+    
+    part = make_xval_partition(size(Xtrain,1), num_fold) ;
     
     % obtain cross-validation errors
     for j = 1:num_k
@@ -144,8 +160,8 @@ errorbar(x, y, e);
 hold on;
 y = mean(errors_test_knn); e = std(errors_test_knn); x = [1 2 3 5 8 13 21 34]; % <- computes mean across all trials
 errorbar(x, y, e);
-title('Original data, KNN, K = [1 2 3 5 8 13 21 34]');
-%title('Noisy data, KNN, K = [1 2 3 5 8 13 21 34]');
+%title('Original data, KNN, K = [1 2 3 5 8 13 21 34]');
+title('Noisy data, KNN, K = [1 2 3 5 8 13 21 34]');
 xlabel('K');
 ylabel('Error');
 legend('10-Fold Error','Test Error');
