@@ -10,7 +10,7 @@
 
 \title{CIS 520, Machine Learning, Fall 2017: Assignment 2\\
 Due: Monday, September 25th, 11:59pm (via turnin for all codes)
-\author{Eric Oh, Jiarui Lu}
+\author{Jiarui Lu, Eric Oh}
 \ifthenelse{\boolean{ShowSolutions}}{ \\ \bf Solutions }{} }
 \date{}
 
@@ -107,7 +107,7 @@ Noisy data with Kernel Regression
 \includegraphics[width=7in,height=3in]{kern_noisy_varyN.png}
 \end{figure}
 
-In general, we observe that as $N$ increases, the training error decreases as we would expect. For KNN in both the original and noisy datasets, the test error is lower than that of the training error, suggesting that there is not much overfitting. For Kernel Regression, the noisy dataset results in higher test error than training error, suggesting that we might be overfitting to noise. 
+In general, the training error and the testing error are very close and do not get better as $N$ increases. It is worth noting that the training and testing error for the noisy datasets are much larger than those using the original data. 
 
  
 \item For both the original and the noisy data, compute the
@@ -148,7 +148,7 @@ Noisy data with Kernel Regression
 \includegraphics[width=7in, height=3in]{kern_noisy_varySIGMA.png}
 \end{figure}
  
- The best $\sigma$ for the original data is 3, the best $\sigma$ for the noisy data is 9, the best $K$ for the original data is 2, and the best $K$ for the noisy data is 3.
+ The best $\sigma$ for the original data is 4, the best $\sigma$ for the noisy data is 9, the best $K$ for the original data is 2, and the best $K$ for the noisy data is 34.
 
 
 \end{itemize}
@@ -227,8 +227,8 @@ We also provide you a decision tree tool in the code.
 \centering
 \begin{tabular}{|c|c|c|c|c|c|} \hline
 &training error on $X$& testing error on $X$&training error on $X_{\text noisy}$&testing error on $X_{\text noisy}$\\ \hline
-K-NN & 0.0244 & 0.0467 & 0.2222 & 0.2267 \\ \hline
-Kernel Regression & 0.0356 & 0.0400 & 0.1733 & 0.1733 \\ \hline
+K-NN & 0.0222 & 0.0200 & 0.1800 & 0.1267 \\ \hline
+Kernel Regression & 0.0422 & 0.0133 & 0.1844 & 0.1267 \\ \hline
 Decision Tree & & & & \\ \hline
 Logistic Regression & & & & \\ \hline
 \end{tabular}
