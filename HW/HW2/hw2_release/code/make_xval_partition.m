@@ -12,10 +12,6 @@ function [part] = make_xval_partition(n, n_folds)
 
 % YOUR CODE GOES HERE
 
-% set seed
-set_rng = randsample(100000, 1) ; 
-rng(set_rng) ;
-
 size_fold = zeros(n_folds,1);  % empty vector of fold sizes
 nDat = n;
 
@@ -25,18 +21,23 @@ for i =  1:n_folds
     nDat = nDat - size_fold(i) ;  % updated number of vectors
 end
 
-part = zeros(n,1) ;
+part = zeros(1,n) ;
 ind = 1 ;
 
 ind_vec = 1:n_folds ; 
 
-for j = 1:n_folds
-     fold_ind = randsample(ind_vec,1);
-     ind_vec(ind_vec == fold_ind) = [];
+set_rng = randsample(100000, 1) ; 
+rng(set_rng) ;
+
+while length(ind_vec) > 0
+     fold_ind = randsample(length(ind_vec),1) ;
+     fold_num = ind_vec(fold_ind) ; 
      
-     size_ind = size_fold(fold_ind) ;
-     part(ind : ind + size_ind - 1) = j ;
+     size_ind = size_fold(fold_num) ;
+     part(ind : ind + size_ind - 1) = fold_num ;
      ind = ind + size_ind ;
+     
+     ind_vec(ind_vec == fold_num) = [];
      
 end
 
