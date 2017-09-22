@@ -21,19 +21,23 @@ nDat = n;
 
 % fill vector of fold sizes
 for i =  1:n_folds 
-    size = floor(nDat / (n_folds - i + 1)) ;  % divide number of vectors by remaining folds
-    size_fold(i) = size ;
-    nDat = nDat - size ;  % updated number of vectors
+    size_fold(i) = floor(nDat / (n_folds - i + 1)) ;  % divide number of vectors by remaining folds
+    nDat = nDat - size_fold(i) ;  % updated number of vectors
 end
 
 part = zeros(n,1) ;
 ind = 1 ;
 
-% get indices of datapoints
+ind_vec = 1:n_folds ; 
+
 for j = 1:n_folds
-    size_ind = size_fold(j) ;
-    part(ind : ind + size_ind - 1) = j ;
-    ind = ind + size_ind ;
+     fold_ind = randsample(ind_vec,1);
+     ind_vec(ind_vec == fold_ind) = [];
+     
+     size_ind = size_fold(fold_ind) ;
+     part(ind : ind + size_ind - 1) = j ;
+     ind = ind + size_ind ;
+     
 end
 
 part = part(randperm(length(part))) ;
