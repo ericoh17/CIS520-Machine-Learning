@@ -1,4 +1,4 @@
-function [part] = make_xval_partition(n, n_folds)
+function [part] = make_xval_partition_jerry(n, n_folds)
 % MAKE_XVAL_PARTITION - Randomly generate cross validation partition.
 %
 % Usage:
@@ -10,38 +10,33 @@ function [part] = make_xval_partition(n, n_folds)
 % where PART(i) is a number in (1...N_FOLDS) indicating the fold assignment
 % of the i'th data point.
 
+
 % YOUR CODE GOES HERE
+%set seed
+%rng(1111);
 
-size_fold = zeros(n_folds,1);  % empty vector of fold sizes
-nDat = n;
+part = zeros(1,n);
 
-% fill vector of fold sizes
-for i =  1:n_folds 
-    size_fold(i) = floor(nDat / (n_folds - i + 1)) ;  % divide number of vectors by remaining folds
-    nDat = nDat - size_fold(i) ;  % updated number of vectors
+if mod(n,n_folds)==0
+    population = 1:n;
+    for j=1:n_folds
+        pick = randsample(population,n/n_folds);
+        part(pick)=j;
+        population = setdiff(population,pick);
+    end
+else
+    population =1:n;
+    size_1 = (n - mod(n,n_folds))/n_folds;
+    rem_1 = mod(n,n_folds);
+    onelarge = randsample(n_folds,rem_1);
+    for j=1:n_folds
+        if ismember(j,onelarge)==1
+            pick = randsample(population,size_1+1);
+        else
+            pick = randsample(population,size_1);
+        end
+        part(pick)=j;
+        population = setdiff(population,pick);
+    end
 end
-
-part = zeros(1,n) ;
-ind = 1 ;
-
-ind_vec = 1:n_folds ; 
-
-set_rng = randsample(100000, 1) ; 
-rng(set_rng) ;
-
-while length(ind_vec) > 0
-     fold_ind = randsample(length(ind_vec),1) ;
-     fold_num = ind_vec(fold_ind) ; 
-     
-     size_ind = size_fold(fold_num) ;
-     part(ind : ind + size_ind - 1) = fold_num ;
-     ind = ind + size_ind ;
-     
-     ind_vec(ind_vec == fold_num) = [];
-     
-end
-
-part = part(randperm(length(part))) ;
-
-
-
+    
