@@ -22,6 +22,26 @@ function labels = logistic_regression(Xtrain,Ytrain,Xtest,stepsize,iterations)
     % labels, so you will have to perform some thresholding on the computed
     % probability values.
     
+  
+    
+    %add on covarite
+    Xtrain_ones = [ones(size(Xtrain,1),1) Xtrain];
+    Xtest_ones = [ones(size(Xtest,1),1) Xtest];
+    
     % FILL IN THE REST OF YOUR CODE.
+    weights = ones(size(Xtrain_ones,2),1); % P x 1 vector of initial weights
+    step_size = stepsize;
+    n = size(Xtrain,1);
+    
+    for iter = [1:iterations]
+        %step_size = step_size*1/sqrt(2); %step size changing
+        
+        p = exp(Xtrain_ones * weights)./(1+exp(Xtrain_ones*weights)); %probability
+        gradiant = 1/n*Xtrain_ones'* (Ytrain - p);
+        weights = weights + step_size * gradiant;
+    end
+    
+    labels = exp(Xtest_ones * weights)./(1+exp(Xtest_ones * weights)) >=0.5;
+    
 
 end
