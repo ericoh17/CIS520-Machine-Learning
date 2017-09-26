@@ -1,0 +1,84 @@
+%template for the question naive_bayes_vs_linear_classifier
+
+\section{Na{\"i}ve Bayes as a Linear Classifier}
+In this question we will consider the problem of binary classification, where we call one class positive and the other negative (for example spam vs.\ non-spam), i.e.\ each label $y \in \{\pm 1\}$.
+We will also assume that each instance $\bx = (x_1, \cdots, x_n)$ has binary attribute/feature values, i.e.\ each attribute/feature $x_i \in \{0,1\}$. 
+
+Let $p = \Pr(y =1)$, $\alpha_i = \Pr(x_i = 1 | y = 1)$, and $\beta_i = \Pr(x_i = 1 | y = -1)$. We will assume that all the attributes of each instance $\bx$ are conditionally independent given $y$. Formally,
+\[
+\Pr(\bx | y) = \Pi_{i=1}^n \Pr( x_i | y )
+	\,.
+\]
+
+
+Recall that a Na{\"i}ve Bayes classifier $h$ \footnote{Assume $h(\bx) = -1$ in case there is a tie.} can be written as:
+\begin{equation}
+h(\bx) = \max_{y \in \{\pm 1\}} \hat{\Pr}(y | \bx) \label{eq:bayes}
+	\,,
+\end{equation}
+where the probability $\hat{\Pr}(y | \bx)$ is estimated from data.
+
+For the above problem the Na{\"i}ve Bayes classifier can be written in the form of a linear classifier, i.e.\ for some $\bw \in \R^{n}$ and $b \in \R$
+
+\[
+h(\bx) = \text{sign} (\bw^\top \bx + b)
+	\,,
+\] 
+ where the sign function returns $+1$ when $\bw^\top \bx + b$ is positive, and $-1$ otherwise.
+In the problem you will be asked to find such a $\bw$ and $b$. 
+
+
+
+
+\begin{enumerate}
+
+
+\item Show that the conditional probability of $\bx$ given $y$ can be written as:
+\[
+\Pr(\bx | y = 1) = \Pi_{i=1}^n ~  \alpha_i^{x_i} \cdot (1-\alpha_i)^{(1-x_i)}
+	\,,
+\] 
+and 
+\[
+\Pr(\bx | y = -1) = \Pi_{i=1}^n ~ \beta_i^{x_i} \cdot (1-\beta_i)^{(1-x_i)}
+	\,.
+\] 
+
+
+
+\item Given data $D = \{(\bx_1, y_1), \cdots (\bx_m, y_m)\}$ find the maximum likelihood estimates (MLE) of the parameters $p$, $\alpha_i$, and $\beta_i$ for each $ i \in \{1, \cdots, n\}$. Call these estimates $\hat{p}$, $\hat{\alpha}_i$, and $\hat{\beta}_i$, respectively.
+
+
+%Call the MLE estimates of $p$, $\alpha_i$, and $\beta_i$, calculated in the previous question, as $\hat{p}$, $\hat{\alpha}_i$, and $\hat{\beta}_i$, respectively.
+
+
+\item Let $\hat{\Pr}(y | \bx)$ be the probability distribution of $y$ given $\bx$ corresponding to the MLE estimates $\hat{p}$, $\hat{\alpha}_i$'s, and $\hat{\beta}_i$'s. Using Equation (\ref{eq:bayes}) show that $h(\bx)$ can be written as
+\begin{equation}
+h(\bx) = \text{sign} \big( \hat{\Pr}( 1 | \bx ) - \hat{\Pr}( -1 | \bx) \big)  \label{eq:bayes2}
+	\,.
+\end{equation}
+
+
+\item Using Bayes rule and the form of $\hat{\Pr}(y | \bx)$ show that
+\[
+	h(\bx) = \text{sign} (\bw^\top \bx + b)
+	\,,
+\]
+and find the value of $\bw$ and $b$.
+
+
+\textbf{Hint:} You need to take the $\log$ of both $\hat{\Pr}(1 | \bx)$ and $\hat{\Pr}(-1 | \bx)$ in Equation (\ref{eq:bayes2}), and use the fact that $\log$ is an increasing function.
+
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+

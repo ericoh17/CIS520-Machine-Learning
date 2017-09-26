@@ -1,0 +1,60 @@
+\section{ MDL on a toy dataset}
+
+We provide a data set (train\_data.mat, train\_y.mat, test\_data.mat, test\_y.mat) generated from a particular model with $N=64$. We want to estimate
+
+\begin{equation*}
+ \hat{y} =  w_1 x_1 + w_2 x_2 + w_3 x_3 
+\end{equation*}
+
+We want to use MDL to find the 'optimal' $L_0$-penalized model.
+
+\begin{enumerate}
+\item  Estimate the three linear regressions \\
+
+(We could actually try all possible subsets here, but instead we'll just try three.)
+
+\begin{align*}
+  y_1& = w_1 x_1 \\
+  y_2& = w_1 x_1 + w_2 x_2 \\
+  y_3& = w_1 x_1 + w_2 x_2 + w_3 x_3  \\
+\end{align*}
+
+For each of the three cases, what is
+\begin{enumerate}
+\item the sum of square error \\
+i)   $\text{Err}_1 = $ \\
+ii)  $\text{Err}_2 = $\\
+iii) $\text{Err}_3 = $\\
+
+
+\item 2 times the estimated bits to code the residual ($n \log{\frac{Error}{n}} $)  \\
+i)    $\text{ERR}\_\text{bits}_1 = $ \\
+ii)   $\text{ERR}\_\text{bits}_2 = $ \\
+iii)  $\text{ERR}\_\text{bits}_3 = $ \\
+
+
+\item 2 times the estimated bits to code each residual plus model under AIC ($2*1$ bit to code each feature) \\
+i)    $\text{AIC}\_\text{bits}_1 = $ \\
+ii)   $\text{AIC}\_\text{bits}_2 = $ \\
+iii)  $\text{AIC}\_\text{bits}_3 = $ \\
+
+
+\item 2 times the estimated bits to code each residual plus model under BIC  ($2*(1/2) log(n)$ bits to code each feature) \\
+i)   $\text{BIC}\_\text{bits}_1 = $ \\
+ii)  $\text{BIC}\_\text{bits}_2 = $ \\
+iii) $\text{BIC}\_\text{bits}_3 = $ \\
+
+\end{enumerate}
+
+
+\item Which model has the smallest minimum description length? \\
+a) for AIC \\
+b) for BIC\\
+
+
+\item  Included in the kit is a test data set; does the error on the test set for the three models
+   correspond to what is expected from MDLs?  Please compute the test errors and briefly explain it in one sentence.
+
+
+\end{enumerate}
+

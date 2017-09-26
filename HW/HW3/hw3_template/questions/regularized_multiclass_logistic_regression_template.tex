@@ -1,0 +1,32 @@
+%template for the question regularized_multiclass_logistic_regression
+\newcommand{\pr}{\mathbf{P}}  %--- example
+\newcommand{\vw}{\mathbf{w}}
+\newcommand{\vx}{\mathbf{x}}
+
+\section{Multiclass Logistic Regression}
+In this question, we will see how we can extend the logistic regression model from HW2 (which was used for binary classifiction) to multi-class classification. Let's say we have $C$ different classes, and for a class $j$ we have :
+
+$$ \pr(Y = j \mid X = \mathbf{x}) = \frac{\exp\{\vw_j^Tx\}}{\sum_{k=1}^{C} \exp\{\vw_k^Tx\}}  \ \ \forall j \in \{1, 2, .., C\}$$
+
+where as usual $\mathbf{x}$ is a vector of features, and $\vw_j$ is the weight vector assigned to class $j$. Our objective is to estimate the weights using gradient ascent (just like we did last week), but this time there will not be any coding involved. We will also add a regularization term to the loss function to avoid overfitting.
+
+\begin{enumerate}
+\item Suppose that the training matrix is of dimensions $M \times N$, which is to say that you have $M$ data points and each data point has $N$ features. Write down the log likelihood, $L(\vw_1, ..., \vw_C)$. Now add a $L2$ regularization term. Please show all your steps and write a justification for each step.
+
+\item Next, derive the expression for the $j^{th}$ index in the vector gradient (i.e. partial derivative) $L(\vw_1, ..., \vw_C)$, with respect to $\vw_j$.
+
+\item Now, write down the update equation for weight vector $\vw_j$, with $\eta$ as the step size.
+
+\item Will the sequence of consecutive weight vectors converge? If yes, to what? Why?
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+

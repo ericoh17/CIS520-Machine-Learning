@@ -1,0 +1,42 @@
+\documentclass[english]{article}
+
+%% Packages pull in extra commands:
+%% http://en.wikibooks.org/wiki/LaTeX/Packages
+\usepackage[latin9]{inputenc}
+\usepackage[letterpaper]{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{latexsym}
+\usepackage{xspace}
+
+% New commands serve as shorthand for frequently used command combinations.
+\newcommand{\ind}[1]{\mathbf{1}\left(#1\right)}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\E}{\mathbf{E}}
+\newcommand{\bw}{\mathbf{w}}
+\renewcommand{\Pr}{\mathbf{Pr}\xspace}
+\newcommand{\Bern}{\textsf{Bernoulli}\xspace}
+\newcommand{\XX}{\mathcal{X}}
+\newcommand{\R}{\mathbb{R}}
+
+\title{CIS 520, Machine Learning, Fall 2016: Assignment 3}
+\author{Your name here}
+
+\begin{document}
+\maketitle
+{\normalsize Collaborator: \\ 
+\\ \underline{ Type Collaborator Name Here       }
+
+\input{questions/naive_bayes_as_linear_classifier_template.tex}
+\input{questions/regularized_multiclass_logistic_regression_template.tex}
+\input{questions/feature_selection_template.tex}
+\input{questions/entropy_template.tex}
+\input{questions/minimum_description_length_template.tex}
+
+
+\end{document}
