@@ -26,7 +26,7 @@ if mod(n,n_folds)==0
     end
 else
     population =1:n;
-    size_1 = (n - mod(n,n_folds))/n_fold;
+    size_1 = (n - mod(n,n_folds))/n_folds;
     rem_1 = mod(n,n_folds);
     for j=1:n_folds
         if j<=rem_1

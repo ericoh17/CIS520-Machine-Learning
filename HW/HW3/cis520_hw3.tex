@@ -1,0 +1,401 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumerate}
+\usepackage{tikz,forest}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass : \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+\nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+\stepcounter{#1}
+\nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+\ifnum#1>0
+\setcounter{homeworkProblemCounter}{#1}
+\fi
+\section{Problem \arabic{homeworkProblemCounter}}
+\setcounter{partCounter}{1}
+\enterProblemHeader{homeworkProblemCounter}
+}{
+\exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Problem Set\ \#3}
+\newcommand{\hmwkDueDate}{October 1, 2017}
+\newcommand{\hmwkClass}{CIS 520}
+%\newcommand{\hmwkClassTime}{Section A}
+\newcommand{\hmwkClassInstructor}{Lyle Ungar}
+\newcommand{\hmwkAuthorName}{Eric Oh}
+
+%
+% Title Page
+%
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ }\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+\begin{center}
+{\normalsize \noindent Collaborators: Jiarui Lu} \\
+\end{center}
+\pagebreak
+
+\begin{homeworkProblem}
+Na{\"i}ve Bayes as a Linear Classifier 
+
+\solution
+
+\begin{enumerate}
+
+\item Note that using the given information, we have
+\begin{align*}
+P(x_i|y=1) &= \alpha_i^{x_i} (1-\alpha_i)^{1-x_i} \\
+P(x_i|y=-1) &= \beta_i^{x_i} (1-\beta_i)^{1-x_i}
+\end{align*}
+Then it follows that 
+\begin{align*}
+P(\textbf{x}|y=1) &= \prod_{i=1}^n P(x_i|y=1) \hspace{0.3in} \text{(by the Naive Bayes assumption)} \\
+&= \prod_{i=1}^n \alpha_i^{x_i} (1-\alpha_i)^{1-x_i} \\
+P(\textbf{x}|y=-1) &= \prod_{i=1}^n P(x_i|y=-1) \hspace{0.3in} \text{(by the Naive Bayes assumption)} \\
+&= \prod_{i=1}^n \beta_i^{x_i} (1-\beta_i)^{1-x_i}
+\end{align*}
+
+\item Let $A_j$ denote a random variable such that \[A_j = 
+\left\{\begin{array}{ll}
+1 & \text{if } y_j=1 \\
+0 & \text{if } y_j=-1
+\end{array}\right\}
+\]
+The likelihood is given by:
+\begin{align*}
+L(p,\alpha_i,\beta_i) &= \prod_{j=1}^m P(x_{ji},y_j) = \prod_{j=1}^m P(y_j)P(x_{ji}|y_j) = \prod_{j=1}^m P(y_j) \prod_{i=1}^n P(x_{ji}|y_j) \\
+&= \prod_{j=1}^m \left[p\prod_{i=1}^n\alpha_i^{x_{ji}}(1-\alpha_i)^{x_{ji}}\right]^{A_j} \left[(1-p)\prod_{i=1}^n\beta_i^{x_{ji}}(1-\beta_i)^{x_{ji}}\right]^{1-A_j} \\
+l(p,\alpha_i,\beta_i) = \log L(p,\alpha_i,\beta_i)  &= \sum_{j=1}^m \Bigg[A_j\left\{\log(p) + \sum_{i=1}^nx_{ji}\log(\alpha_i)+(1-x_{ji})\log(1-\alpha_i)\right\} \\
+&+ (1-A_j)\left\{\log(1-p) + \sum_{i=1}^nx_{ji}\log(\beta_i)+(1-x_{ji})\log(1-\beta_i)\right\}\Bigg] 
+\end{align*}
+
+The MLEs are found as follows:
+\begin{align*}
+\frac{dl}{dp} &= \sum_{j=1}^m \left[\frac{A_j}{p} - \frac{(1-A_j)}{1-p}\right] \equiv 0 \hspace{0.15in} \Rightarrow \hspace{0.15in} \hat{p} = \frac{\sum_{j=1}^m A_j}{m} \\
+\frac{dl}{d\alpha_i} &= \sum_{j=1}^m \left[A_j \sum_{i=1}^n \frac{x_{ji}}{\alpha_i} - A_j\sum_{i=1}^n \frac{1-x_{ji}}{1-\alpha_i}\right] \equiv 0 \\
+&\Downarrow \\
+& \sum_{i=1}^n\frac{1}{\alpha_i}\sum_{j=1}^m A_j x_{ji} = \sum_{i=1}^n \frac{1}{1-\alpha_i}\sum_{j=1}^m A_j(1-x_{ji}) \hspace{0.1in} \Rightarrow \hat{\alpha_i} = \frac{\sum_j A_j x_{ji}}{\sum_j A_j}\\ 
+\frac{dl}{d\beta_i} &= \sum_{j=1}^m \left[(1-A_j) \sum_{i=1}^n \frac{x_{ji}}{\beta_i} - (1-A_j)\sum_{i=1}^n \frac{1-x_{ji}}{1-\beta_i}\right] \equiv 0 \\
+&\Downarrow \\
+& \sum_{i=1}^n\frac{1}{\beta_i}\sum_{j=1}^m (1-A_j) x_{ji} = \sum_{i=1}^n \frac{1}{1-\beta_i}\sum_{j=1}^m (1-A_j)(1-x_{ji}) \hspace{0.1in} \Rightarrow \hat{\beta_i} = \frac{\sum_j (1-A_j) x_{ji}}{\sum_j (1-A_j)}\\ 
+\end{align*}
+The second derivatives of the three derivatives above are all easily shown to be negative (not shown for the sake of brevity). 
+
+\item We are given that the NB classifier is $h(x) = \text{argmax}_{y \in \pm 1} \hat{P}(y|x)$ where
+\begin{align*}
+\hat{P}(y|x) \propto \hat{P}(x|y)\hat{P}(y)
+\end{align*}
+From this definition, we would classify $y_i$ as 1 if 
+\begin{align*}
+\hat{P}(y_i=1|\textbf{x}) &> \hat{P}(y_i=-1|\textbf{x}) \\
+\hat{P}(y_i=1|\textbf{x}) &- \hat{P}(y_i=-1|\textbf{x}) > 0
+\end{align*}
+and as -1 otherwise. Thus our NB classifier can be written as
+\begin{align*} h(x) = \text{sign}(\hat{P}(y_i=1|\textbf{x}) &- \hat{P}(y_i=-1|\textbf{x}))\end{align*}
+
+\item Consider the quantity $\hat{P}(y_i=1|\textbf{x}) - \hat{P}(y_i=-1|\textbf{x})$.
+\begin{align*}
+\hat{P}(y_i=1|\textbf{x}) - \hat{P}(y_i=-1|\textbf{x}) &= \hat{p}\prod_{i=1}^n \hat{\alpha}_i^{x_i}(1-\hat{\alpha}_i)^{x_i} - (1-\hat{p})\prod_{i=1}^n \hat{\beta}_i^{x_i}(1-\hat{\beta}_i)^{x_i} \hspace{0.5in} \text{(by Bayes' Rule)}\\
+&= \log(\hat{p}) + \sum_{i=1}^nx_i\log(\hat{\alpha}_i)+(1-x_i)\log(1-\hat{\alpha}_i) \\
+&- \log(1-\hat{p}) + \sum_{i=1}^nx_i\log(\hat{\beta}_i)+(1-x_i)\log(1-\hat{\beta}_i) \hspace{0.5in} \text{(taking logs)} \\
+&= \log\frac{\hat{p}}{1-\hat{p}}+\sum_{i=1}^n\log\left(\frac{1-\hat{\alpha}_i}{1-\hat{\beta}_i}\right) + \sum_{i=1}^n x_i \log\left(\frac{\hat{\alpha}_i(1-\hat{\beta}_i)}{(1-\hat{\alpha}_i)\hat{\beta}_i}\right) 
+\end{align*}
+Note that since the logarithm is an increasing function and all of our MLEs are positive values, taking logs does not change the argument to the sign function for the NB classifier. Now we can let 
+\begin{align*}
+b &= \log\frac{\hat{p}}{1-\hat{p}}+\sum_{i=1}^n\log\left(\frac{1-\hat{\alpha}_i}{1-\hat{\beta}_i}\right) \\
+w_i &= \sum_{i=1}^n \log\left(\frac{\hat{\alpha}_i(1-\hat{\beta}_i)}{(1-\hat{\alpha}_i)\hat{\beta}_i}\right) 
+\end{align*}
+and it follows that the NB classifier can be written $h(x) = \text{sign}(\textbf{w}^T\textbf{x}+b)$. 
+\end{enumerate}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Multiclass Logistic Regression
+
+\solution
+
+\begin{enumerate}
+
+\item Let $y_i^j$ denote a random variable such that \[y_i^j = 
+\left\{\begin{array}{ll}
+1 & \text{if } y_i=j \\
+0 & \text{if } y_i\neq j
+\end{array}\right\}
+\]
+for $j \in \{1,2,\ldots,C\}$. The likelihood is then given by
+\begin{align*}
+L(\textbf{w}_1,\ldots,\textbf{w}_c)&=\prod_{i=1}^M L_i(\textbf{w}_1,\ldots,\textbf{w}_c) \hspace{0.5in} \text{(product over all data points)} \\
+&= \prod_{i=1}^M \prod_{j=1}^C P(y_i=j|\textbf{x} ; \textbf{w}_1,\ldots,\textbf{w}_c)^{y_i^j} \hspace{0.5in} \text{(by given probability and independence assumption)} \\
+l(\textbf{w}_1,\ldots,\textbf{w}_c)&= \sum_{i=1}^M \sum_{j=1}^C y_i^j \log P(y_i=j|\textbf{x};\textbf{w}_1,\ldots,\textbf{w}_c)  \\
+&= \sum_{i=1}^M \sum_{j=1}^C y_i^j \left[\textbf{w}_j^T\textbf{x}-\log\sum_{k=1}^C \text{exp}(\textbf{w}_k^T\textbf{x})\right] \hspace{0.5in} \text{(taking the log)}
+\end{align*}
+To add an $L_2$ regularization term, we add a Gaussian prior where $w \sim \text{N}(0,\lambda^{-1})$. Note that this simplifies to
+\begin{align*}
+f(w;\lambda) = \frac{1}{\sqrt{2\pi\lambda^{-1}}}\text{exp}\left(-\frac{\lambda}{2}w^2\right) \propto \text{exp}\left(-\frac{\lambda}{2}w^2\right) \hspace{0.5in} \text{(likelihood is a function of w)}
+\end{align*}
+Thus the $L_2$ penalized likelihood is given by
+\begin{align*}
+L(\textbf{w}_1,\ldots,\textbf{w}_c) &= \prod_{i=1}^M \prod_{j=1}^C \left\{P(y_i=j|\textbf{x}; \overrightarrow{w})f(\overrightarrow{w}_j;\lambda^{-1})\right\}^{y_i^j} \\
+&\propto \prod_{i=1}^M \prod_{j=1}^C \left\{P(y_i=j|\textbf{x}; \overrightarrow{w})\text{exp}\left(-\frac{\lambda}{2}w_j^2\right)\right\}^{y_i^j} \\
+l(\textbf{w}_1,\ldots,\textbf{w}_c) &= \sum_{i=1}^M \sum_{j=1}^C y_i^j \left[\textbf{w}_j^T\textbf{x}-\log\sum_{k=1}^C \text{exp}(\textbf{w}_k^T\textbf{x}) - \frac{\lambda}{2}w_j^2\right]
+\end{align*}
+
+\item 
+\begin{align*}
+\frac{dl}{dw_j} &= \sum_{i=1}^M y_i^j\textbf{x} - y_i^j\frac{\textbf{x}\text{exp}(\textbf{w}_j^T\textbf{x})}{\sum_{k=1}^C \text{exp}(\textbf{w}_j^T\textbf{x})} - y_i^j\lambda w_j \\
+&= \sum_{i=1}^M y_i^j\textbf{x}\left(1-P(y_i=j|\textbf{x};\textbf{w})\right) - y_i^j\lambda w_j
+\end{align*}
+
+\item 
+\begin{align*}
+w_{j}^{t+1} = w_j^t + \eta \left[\sum_{i=1}^M y_i^j\textbf{x}\left(1-P(y_i=j|\textbf{x};\textbf{w})\right) - y_i^j\lambda w_j\right]
+\end{align*}
+
+\item The weights will converge to a local maximum because the log-likelihood is a convex upwards function. This local maximum will be the point where the gradients are 0.
+\end{enumerate}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Feature Selection
+
+\solution
+
+\begin{enumerate}
+
+\item Assuming a i.i.d data set $\{(x_1,y_1),\ldots,(x_n,y_n)\}$, the MLE is found as follows:
+\begin{align*}
+L(w) &= \prod_{i=1}^n (\sqrt{2\pi})^{-\frac{1}{2}}\sigma^{-1}\text{exp}\left[-\frac{1}{2\sigma^2}(y_i-wx_i)^2\right] \\
+l(w) &= \log L(w) \propto \sum_{i=1}^n -\frac{1}{2\sigma^2}(y_i-wx_i)^2 \\
+\frac{dl}{dw} &= \sum_{i=1}^n \frac{1}{\sigma^2}x_i(y_i-wx_i) \equiv 0 \hspace{0.2in} \Rightarrow \hspace{0.2in} \hat{w}_{\text{MLE}} = (X^TX)^{-1}X^TY \\
+\end{align*}
+Using the provided dataset (data.mat), the numerical MLE is given by 
+\[\hat{w}_{\text{MLE}}=\begin{bmatrix}
+0.8891 \\
+-0.826 \\
+4.1902
+\end{bmatrix}\]
+
+\item 
+\[\hat{w}=\begin{bmatrix}
+0.8646 \\
+-0.8210 \\
+4.1218 \\
+\end{bmatrix}\]
+
+\item 
+\[\hat{w}=\begin{bmatrix}
+0.8749 \\
+-0.8182 \\
+4.1829 \\
+\end{bmatrix}\]
+
+\item 
+\[\hat{w}=\begin{bmatrix}
+0.8891 \\
+-0.826 \\
+4.1902
+\end{bmatrix}\]
+
+\item The MLE follows from the standard linear regression theory. Adding a regularization term shrinks the MLE coefficients corresponding to different penalties. The $L_2$ regularization shrinks the coefficients according to the $L_2$ norm, meaning all coefficients are smaller but none are set to 0. We see that due to the penalty being so small and the squared error dominating, there is not much shrinkage. $L_1$ regularization shrinks coefficients according to the $L_1$ norm, meaning that some coefficients are shrunk to 0. However, our penalty is small and the squared error dominates again, meaning there is some shrinkage but none of the coefficients are 0. $L_0$ regularization shrinks coefficients according to the $L_0$ norm, meaning the penalty is applied to the number of non-zero features. Again, our penalty is small and the number of features is small so in this case we get exactly the MLE. 
+
+\item 
+\begin{enumerate}[label=(\alph*)]
+\item 0.0061
+\item 
+\begin{enumerate}[label=(\roman*)]
+\item When going from N to 2N, the sum of squared error will clearly increase as N increases as we sum over more subjects. However, if we divide the sum of squared error by the number of subjects, consistency results give us that the quantity would converge to the true variance of the outcome. 
+\item We would not expect $\hat{w}_{\text{MLE}}$ to change much as N increases to 2N. From consistency results, it would converge to the true parameter of the data generating distribution as N increases.  
+\end{enumerate}
+\item $\lambda=5$ yields a ratio of $0.8523$.
+\item $\lambda=26$ yields a ratio of $0.4896$
+\end{enumerate}
+
+\end{enumerate}
+
+\end{homeworkProblem}
+
+
+\begin{homeworkProblem}
+Entropy and Minimum Description Length
+
+\solution
+
+\begin{enumerate}
+
+\item The minimum number of bits needed to code the sequence is given by the entropy:
+\begin{align*}
+\text{Entropy} = -\left[\frac{3}{16}\log\left(\frac{3}{16}\right) + \frac{13}{16}\log\left(\frac{13}{16}\right)\right] = 0.6962
+\end{align*}
+
+\item The original penalty for the RIC is $\log_2 f = -\log_2\left(\frac{1}{f}\right)$ based on the prior belief of one feature being included in the model. If we had prior belief that $\frac{3}{16}$ features would be selected for the model, we could update the penalty to be
+\begin{align*}
+\lambda = -\log_2\left(\frac{3}{16}\right) = \log_2\left(\frac{16}{3}\right)
+\end{align*}
+\end{enumerate}
+\end{homeworkProblem}
+
+
+\begin{homeworkProblem}
+MDL on a toy dataset
+
+\solution
+
+\begin{enumerate}
+
+\item
+\begin{enumerate}[label=(\alph*)]
+
+\item 
+\begin{enumerate}[label=(\roman*)]
+\item $\text{Err}_1 =1277.9$
+\item $\text{Err}_2 =835.06$
+\item $\text{Err}_3 =834.74$
+\end{enumerate}
+
+\item 
+\begin{enumerate}[label=(\roman*)]
+\item $\text{Err}_{\text{bits}_1} = 552.91$
+\item $\text{Err}_{\text{bits}_2} = 474.33$
+\item $\text{Err}_{\text{bits}_1} = 474.26$
+\end{enumerate}
+
+\item 
+\begin{enumerate}[label=(\roman*)]
+\item $\text{AIC}_{\text{bits}_1} = 554.91$
+\item $\text{AIC}_{\text{bits}_2} = 478.33$
+\item $\text{AIC}_{\text{bits}_1} = 480.26$
+\end{enumerate}
+
+\item 
+\begin{enumerate}[label=(\roman*)]
+\item $\text{BIC}_{\text{bits}_1} = 558.91$
+\item $\text{BIC}_{\text{bits}_2} = 486.33$
+\item $\text{BIC}_{\text{bits}_1} = 492.26$
+\end{enumerate}
+
+\end{enumerate}
+
+\item 
+\begin{enumerate}[label=(\alph*)]
+\item $y_2 = w_1x_1+w_2x_2$
+\item $y_2 = w_1x_1+w_2x_2$
+\end{enumerate}
+
+\item Yes, the errors on the test set are higher overall but the second model with two features is still the best model in terms of minimum description length for AIC and BIC.  
+
+\end{enumerate}
+\end{homeworkProblem}
+
+\end{document}
