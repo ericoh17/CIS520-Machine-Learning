@@ -7,7 +7,7 @@ q_vec = [1, 2, 3, 4, 5] ;
 C_vec = [1, 10, 10^2, 10^3, 10^4, 10^5];
 
 C_opt = zeros(length(q_vec), 1) ; % C_opt = [100, 10, 1, 1, 1]
-q_CV_err = zeros(5*length(q_vec), length(C_vec)) ; 
+q_CV_err = zeros(length(q_vec), length(C_vec)) ; 
 
 for k = 1:length(q_vec)
   
@@ -39,11 +39,11 @@ for k = 1:length(q_vec)
   [~,ind] = min(mean_cv_err);
   C_opt(k) = C_vec(ind);
   
-  
+  q_CV_err(k,:) = mean_cv_err ;
   
 end
 
-
+Q_C
 training_err = zeros(length(q_vec), 1) ; 
 testing_err = zeros(length(q_vec), 1) ;
 
@@ -67,13 +67,14 @@ for l = 1:length(q_vec)
     testing_err(l) = classification_error(pred_label, test(:,end)) ;  
     
     %save the plot for decision boundary;
-    file = strcat('SVM_polynomial_train_degree_',num2str(q_vec(l))) ;
-    decision_boundary_SVM(train(:,1:(end-1)), train(:,end), poly_model, 200, file);
+    %file = strcat('SVM_polynomial_train_degree_',num2str(q_vec(l))) ;
+    %decision_boundary_SVM(train(:,1:(end-1)), train(:,end), poly_model, 200, file);
     
-    file = strcat('SVM_polynomial_test_degree_',num2str(q_vec(l))) ;
-    decision_boundary_SVM(test(:,1:(end-1)), test(:,end), poly_model, 200, file);
+    %file = strcat('SVM_polynomial_test_degree_',num2str(q_vec(l))) ;
+    %decision_boundary_SVM(test(:,1:(end-1)), test(:,end), poly_model, 200, file);
 end
 
+% plots for 5.2
 figure;
 hold on
 plot(q_vec, training_err, 'b', q_vec, testing_err,'r');
@@ -83,6 +84,22 @@ ylabel('Classification error');
 hold off;
 
 filename = strcat('Plots/ClassificationErr_degree','.pdf');
+title('Classification Error Polynomial Kernel','FontSize', 16, 'FontWeight', 'bold');
+%print(h, '-dpdf', filename);
+saveas(gcf,filename,'pdf');
+
+
+
+% plots for 5.3
+figure;
+hold on
+plot(q_vec, training_err, 'b', q_vec, testing_err,'r', q_vec, mean(q_CV_err,2), 'g');
+legend('training error', 'testing error', 'CV error');
+xlabel('degree(q)');
+ylabel('Classification error');
+hold off;
+
+filename = strcat('Plots/ClassificationErr_degree_CV','.pdf');
 title('Classification Error Polynomial Kernel','FontSize', 16, 'FontWeight', 'bold');
 %print(h, '-dpdf', filename);
 saveas(gcf,filename,'pdf');

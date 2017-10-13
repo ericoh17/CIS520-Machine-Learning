@@ -43,6 +43,7 @@ for k = 1:length(q_vec)
   
 end
 
+q_CV_err_opt = min(q_CV_err, [], 2);
 
 training_err = zeros(length(q_vec), 1) ; 
 testing_err = zeros(length(q_vec), 1) ;
@@ -67,11 +68,11 @@ for l = 1:length(q_vec)
     testing_err(l) = classification_error(pred_label, test(:,end)) ;  
     
     %save the plot for decision boundary;
-    %file = strcat('SVM_polynomial_train_degree_',num2str(q_vec(l))) ;
-    %decision_boundary_SVM(train(:,1:(end-1)), train(:,end), poly_model, 200, file);
+    file = strcat('SVM_polynomial_train_degree_',num2str(q_vec(l))) ;
+    decision_boundary_SVM(train(:,1:(end-1)), train(:,end), poly_model, 200, file);
     
-    %file = strcat('SVM_polynomial_test_degree_',num2str(q_vec(l))) ;
-    %decision_boundary_SVM(test(:,1:(end-1)), test(:,end), poly_model, 200, file);
+    file = strcat('SVM_polynomial_test_degree_',num2str(q_vec(l))) ;
+    decision_boundary_SVM(test(:,1:(end-1)), test(:,end), poly_model, 200, file);
 end
 
 % plots for 5.2
@@ -93,7 +94,7 @@ saveas(gcf,filename,'pdf');
 % plots for 5.3
 figure;
 hold on
-plot(q_vec, training_err, 'b', q_vec, testing_err,'r', q_vec, mean(q_CV_err,2), 'g');
+plot(q_vec, training_err, 'b', q_vec, testing_err,'r', q_vec, q_CV_err_opt, 'g');
 legend('training error', 'testing error', 'CV error');
 xlabel('degree(q)');
 ylabel('Classification error');
