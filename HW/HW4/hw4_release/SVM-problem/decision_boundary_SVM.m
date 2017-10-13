@@ -48,11 +48,11 @@ ylabel('Feature 2');
 legend('Positive Test Examples', 'Negative Test Examples', 'Classifier Boundary', 'Location','best');
 hold off;
 
-filename = strcat('Plots/',file_to_save);
-title(strcat({'Decision Boundary for '}, file_to_save, ' kernel '),'Interpreter','latex','FontSize', 16, 'FontWeight', 'bold');
+filename = strcat('Plots/',file_to_save,'.png');
+%title(strcat({'Decision Boundary for '}, file_to_save, ' kernel '),'Interpreter','latex','FontSize', 16, 'FontWeight', 'bold');
 %axis([10^(-3) 1  0 0.7]);
 set(gcf, 'PaperPositionMode', 'auto');
 % save the file at the desired location
-%saveas(gcf,filename,'fig');
-print(h, '-dpng', filename);
+saveas(gcf,filename,'png');
+%print(h, '-dpng', filename);
 

@@ -11,23 +11,15 @@ function model [pred_labels] = SVM_train(test_data, kerneltype)
     
     % Default code below. Fill in your code on all the relevant positions
 
-    m = size(test_data , 1);
-    n = size(test_data, 2);
+    %m = size(test_data , 1);
+    %n = size(test_data, 2);
 
     %load train_data
 
     datadir = 'Breast-Cancer/';
 
     load(strcat(datadir,'train.mat'));
-
-
-    %load cross-validation data
-
-    %your code
-
-
-
-
+    
     % Do cross-validation
     % For all c
     % For all kernel parameters
