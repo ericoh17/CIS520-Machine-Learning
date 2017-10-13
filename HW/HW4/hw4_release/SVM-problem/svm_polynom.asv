@@ -6,7 +6,8 @@
 q_vec = [1, 2, 3, 4, 5] ;
 C_vec = [1, 10, 10^2, 10^3, 10^4, 10^5];
 
-C_opt = zeros(length(q_vec), 1) ;
+C_opt = zeros(length(q_vec), 1) ; % C_opt = [100, 10, 1, 1, 1]
+q_CV_err = zeros(5*length(q_vec), length(C_vec)) ; 
 
 for k = 1:length(q_vec)
   
@@ -37,6 +38,8 @@ for k = 1:length(q_vec)
   mean_cv_err = mean(fold_err) ;
   [~,ind] = min(mean_cv_err);
   C_opt(k) = C_vec(ind);
+  
+  
   
 end
 
@@ -79,10 +82,10 @@ xlabel('degree(q)');
 ylabel('Classification error');
 hold off;
 
-filename = strcat('Plots/CV_degree','.pdf');
-title(strcat({'Classification Error for degree='},num2str(q_vec(l)), ' kernel '),'FontSize', 16, 'FontWeight', 'bold');
+filename = strcat('Plots/ClassificationErr_degree','.pdf');
+title('Classification Error Polynomial Kernel','FontSize', 16, 'FontWeight', 'bold');
 %print(h, '-dpdf', filename);
 saveas(gcf,filename,'pdf');
 
 [~,ind] = min(testing_err);
-q_opt = q_vec(ind);
+q_opt = q_vec(ind); % 4
