@@ -75,7 +75,7 @@ for l = 1:length(q_vec)
     decision_boundary_SVM(test(:,1:(end-1)), test(:,end), poly_model, 200, file);
 end
 
-% plots for 5.2
+% plots for 5.1
 figure;
 hold on
 plot(q_vec, training_err, 'b', q_vec, testing_err,'r');
