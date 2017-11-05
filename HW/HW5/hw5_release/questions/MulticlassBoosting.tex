@@ -1,0 +1,107 @@
+\section{Multiclass Boosting \hpoints{25}} 
+
+In this problem you will analyze the AdaBoost.M1 algorithm, a multiclass extension of AdaBoost. Given a training sample $S=((x_1,y_1),\ldots,(x_m,y_m))$, where $x_i$ are instances in some instance space $\X$ and $y_i$ are multiclass labels that take values in $\{1,\ldots,K\}$, the algorithm maintains weights $D_t(i)$ over the examples $(x_i,y_i)$ as in AdaBoost, and on round $t$, gives the weighted sample $(S,D_t)$ to the weak learner. The weak learner returns a multiclass classifier $h_t:\X\>\{1,\ldots,K\}$ with weighted error less than $\half$; here the weighted error of $h_t$ is measured as 
+\[
+\er_t = \sum_{i=1}^m D_t(i) \cdot \1(h_t(x_i) \neq y_i)
+	\,.
+\]
+Note that the assumption on the weak classifiers is stronger here than in the binary case, since we require the weak classifiers to do more than simply improve upon random guessing (there are other multiclass boosting algorithms that allow for weaker classifiers; you will analyze the simplest case here). 
+For convenience, we will encode the weak classifier $h_t$ as $\tilde{h}_t:\X\>\{\pm1\}^K$, where 
+\[
+\tilde{h}_{t,k}(x) = 
+\begin{cases}
+	+1 & \text{if $h_t(x) = k$} \\
+	-1 & \text{otherwise.}
+\end{cases}
+\]
+In other words, $\tilde{h}_t(x)$ is a $K$-dimensional vector that contains $+1$ in the position of the predicted class for $x$ and $-1$ in all other $(K-1)$ positions.
+On each round, AdaBoost.M1 re-weights examples such that examples misclassified by the current weak classifier receive higher weight in the next round. At the end, the algorithm combines the weak classifiers $h_t$ via a weighted majority vote to produce a final multiclass classifier $H$:
+%; see \Fig{fig:adaboost-m1}. 
+%
+\begin{center}
+\begin{tabular}{l}
+\hline
+Algorithm \textbf{AdaBoost.M1} \rule{0pt}{12pt} \\
+\hline
+\textbf{Inputs:} Training sample $S=((x_1,y_1),\ldots,(x_m,y_m))\in(\X\times\{1,\ldots,K\})^m$ \rule{0pt}{12pt} \\
+\quad\quad\quad\quad Number of iterations $T$ \\[2pt]
+\textbf{Initialize:} $D_1(i) = \frac{1}{m} ~~\forall i \in [m]$ \\[2pt]
+For $t=1,\ldots,T$:\\
+\quad-- Train weak learner on weighted sample $(S,D_t)$; get weak classifier $h_t:\X\>\{1,\ldots,K\}$ \\[3pt]  %$f_t:\X\>\R$ \\
+%\quad-- Choose $\alpha_t\in\R$ \\
+\quad-- Set $\alpha_t \leftarrow \displaystyle{\frac{1}{2}} \ln\bigg( \displaystyle{\frac{1-\er_t}{\er_t}} \bigg)$ \\
+\quad-- Update:\\
+\quad\quad\quad\quad $D_{t+1}(i) \leftarrow \displaystyle{\frac{D_t(i)\exp(-\alpha_t \, \tilde{h}_{t,y_i}(x_i))}{Z_t}}$ \\[10pt]
+%\quad\quad where \\
+%\quad\quad\quad \quad\quad\quad\quad\quad\quad $Z_t = \displaystyle{\sum_{j=1}^m D_t(j) \exp(-\alpha_t y_j f_t(x_j))}$ \\[2pt]
+\quad\quad where $Z_t = {\sum_{j=1}^m D_t(j) \exp(-\alpha_t \, \tilde{h}_{t,y_j}(x_j))}$ \\[8pt]
+\textbf{Output final hypothesis:} \\
+\quad\quad\quad 
+%$h_S(x) \equiv 
+$H(x) \in \arg\max_{k\in\{1,\ldots,K\}} \underbrace{\sum_{t=1}^T \alpha_t \tilde{h}_{t,k}(x)}_{F_{T,k}(x)} $ \\[2pt]
+\hline
+\end{tabular}
+\end{center}
+%
+%Again, for convenience, we will encode the final classifier $H$ as $\tilde{H}:\X\>\{\pm1\}^K$, where 
+%\[
+%\tilde{H}_k(x) = 
+%\begin{cases}
+%	+1 & \text{if $H(x) = k$} \\
+%	-1 & \text{otherwise.}
+%\end{cases}
+%\]
+You will show, in five parts below, 
+%that for a sufficiently large number of rounds $T$, 
+that if all the weak classifiers have error $\er_t$ at most $\half-\gamma$, then after $T$ rounds,
+the training error of the final classifier $H$, given by 
+\[
+\er_S[H] = \frac{1}{m} \sum_{i=1}^m \1(H(x_i)\neq y_i)
+	\,,
+\]
+is at most $e^{-2T\gamma^2}$ (which means that for large enough $T$, the final error $\er_S[H]$ can be made as small as desired).
+%
+
+\paragraph{(a)\hpoints{5}}
+Show that
+\[
+%D_{T+1}(i) = \frac{D_1(i) \, \exp\big(-\textstyle{\sum_{t=1}^T} \alpha_t \, \tilde{h}_{t,y_i}(x_i) \big)}{\prod_{t=1}^T Z_t}
+D_{T+1}(i) ~ = ~ \frac{\frac{1}{m} \, e^{-F_{T,y_i}(x_i)}}{\prod_{t=1}^T Z_t}
+	\,.
+\] 
+\paragraph{(b)\hpoints{5}}
+Show that 
+\[
+\1(H(x_i)\neq y_i) ~ \leq ~
+%	\1\big( \textstyle{\sum_{t=1}^T} \alpha_t \, \tilde{h}_{t,y_i}(x_i) < 0 \big)
+	\1\big( F_{T,y_i}(x_i) < 0 \big)
+	\,.
+\]
+(\emph{Hint:} Consider separately the two cases $H(x_i)\neq y_i$ and $H(x_i) = y_i$, and note that $\sum_{k=1}^K F_{T,k}(x_i) = -(K-2)\sum_{t=1}^T \alpha_t$.)
+\paragraph{(c)\hpoints{5}}
+Show that 
+\[
+\er_S[H] ~ \leq ~
+%	\frac{1}{m} \sum_{i=1}^m \exp\big( -{\textstyle{\sum_{t=1}^T}} \alpha_t \, \tilde{h}_{t,y_i}(x_i) \big) 
+	\frac{1}{m} \sum_{i=1}^m e^{-F_{T,y_i}(x_i)}
+	~ = ~
+	\prod_{t=1}^T Z_t
+	\,.
+\]
+(\emph{Hint:} For the inequality, use the 
+%fact that $\1(H(x_i)\neq y_i) \leq \1\big( \textstyle{\sum_{t=1}^T} \alpha_t \, \tilde{h}_{t,y_i}(x_i) < 0 \big)$, 
+result of part (b) above, 
+and the fact that $\1(u<0) \leq e^{-u}$; for the equality, use the result of part (a) above.)
+\paragraph{(d)\hpoints{5}}
+Show that for the given choice of $\alpha_t$, we have 
+\[
+Z_t ~ = ~ 2 \sqrt{\er_t(1-\er_t)}
+	\,.
+\]
+\paragraph{(e)\hpoints{5}}
+Suppose $\er_t \leq \half - \gamma$ for all $t$ (where $0 < \gamma \leq \half$). Then show that 
+\[
+\er_S[H] ~ \leq ~ e^{-2T\gamma^2}
+	\,.
+\]
+

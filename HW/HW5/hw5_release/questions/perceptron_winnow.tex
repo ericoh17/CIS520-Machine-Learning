@@ -1,0 +1,69 @@
+\section{Perceptron vs.\ Winnow \hpoints{25}}
+For online binary classification problems, you saw the Perceptron algorithm in class. Another algorithm that is used for such problems is the \emph{Winnow} algorithm, which also maintains a linear classification model $\w_t$, but makes \emph{multiplicative updates} to $\w_t$ rather than additive ones (such multiplicative updates now play an important role in many modern optimization algorithms). In this case, the weight vectors $\w_t$ always have positive entries that add up to 1:
+%
+\begin{center}
+\begin{tabular}{l}
+\hline
+Algorithm \textbf{Winnow} \rule{0pt}{12pt} \\
+\hline
+\textbf{Learning rate parameter} $\eta > 0$ \rule{0pt}{12pt} \\
+\textbf{Initial weight vector} $\w_1 = (\frac{1}{d},\ldots,\frac{1}{d})\in\R^d$ \\
+For $t=1,\ldots,T$:\\
+\quad-- Receive instance $\x_t \in \R^d$\\
+\quad-- Predict $\hat{y}_t = \sign(\w_t^\top\x_t)$\\
+\quad-- Receive true label $y_t \in \{\pm1\}$\\
+\quad-- Update: If $\hat{y}_t \neq y_t$ then \\
+\quad\quad\quad For each $i\in\{1,\ldots,d\}$:~~ $w_{t+1,i} \leftarrow \displaystyle{\frac{w_{t,i} \exp(\eta \, y_t x_{t,i})}{Z_t}}$ \\[6pt]
+\quad\quad\quad \hspace{1.5cm} where $Z_t = \sum_{j=1}^n w_{t,j} \exp(\eta \, y_t x_{t,j})$ \\
+\quad\quad else \\
+\quad\quad\quad $\w^{t+1} \leftarrow \w^t$\\[2pt]
+\hline
+\end{tabular}
+\end{center}
+%
+For 
+%linearly separable 
+examples that are linearly separable by a non-negative weight vector, the Winnow algorithm is known to have the following mistake bound:
+
+\textbf{Theorem} (Winnow mistake bound).
+\emph{
+Suppose that the examples seen in $T$ trials are linearly separable by a non-negative weight vector, i.e.\ that there exists a weight vector $\u\in\R_+^d$ and $\gamma>0$ such that 
+\[
+y_t (\u^\top \x_t) \geq \gamma ~~\text{for all $t\in\{1,\ldots,T\}$.} 
+\]
+%Let $R = \max\big\{\|\x_t\|_2 ~\big|~ \1\leq t\leq T \big\}$. 
+Also suppose $\|\x_t\|_\infty \leq R_\infty$ for all $t$.
+%Then the number of mistakes made by Winnow in the $T$ trials is at most
+%\[
+%    \frac{\|\u\|_1 \ln n}{\eta\gamma - \|\u\|_1 \ln\left(\frac{e^{\eta R_\infty} + e^{-\eta R_\infty}}{2}\right)}
+%    \,.
+%\]
+%Moreover, i
+If $\|\u\|_1$, $\gamma$, and $R_\infty$ are known, then one can select the learning rate parameter $\eta$ in a way that the number of mistakes in the $T$ trials is at most
+\[
+    2 \left( \frac{R_\infty^2 \|\u\|_1^2}{\gamma^2} \right) \ln (d)
+    \,.
+\]
+}
+
+
+\paragraph{(a) Sparse target vector $\u$, dense feature vectors $\x_t$. \hpoints{10}}
+~\\
+Suppose you are in a setting with high-dimensional features (large $d$), and 
+that all features are of roughly constant magnitude; for simplicity, suppose $\x_t\in\{\pm1\}^d$ for all $t$.
+Suppose you are told that the examples in $T$ trials are linearly separable by a sparse weight vector $\u\in\{0,1\}^d$ which has only $k\ll d$ non-zero entries, and that you are given $\gamma>0$ such that $y_t(\u^\top\x_t) > \gamma$ for all $t$.
+Calculate upper bounds on the numbers of mistakes that would be made by both Perceptron and Winnow. Which algorithm would be a better choice here?
+%
+
+\paragraph{(b) Dense target vector $\u$, sparse feature vectors $\x_t$.\hpoints{10}}
+~\\
+Suppose you are in a setting with high-dimensional features (large $d$), and 
+that the feature vectors are sparse; for simplicity, suppose $\x_t\in\{0,-1,+1\}^d$ for all $t$ and that each $\x_t$ has $k\ll d$ non-zero entries.
+Suppose you are told the examples in $T$ trials are linearly separable by a dense weight vector $\u\in\R_+^d$ with $\|\u\|_1= d$ and $\|\u\|_2\leq 2\sqrt{d}$, and that you are given $\gamma>0$ such that $y_t(\u^\top\x_t) > \gamma$ for all $t$.
+Calculate upper bounds on the numbers of mistakes that would be made by both Perceptron and Winnow. Which algorithm would be a better choice here?
+%
+~\\
+\paragraph{(c)} If your problem has non-negative feature vectors $\x_t\in\R_+^d$, is the Winnow algorithm a meaningful choice? Why or why not? \hpoints{5}
+
+
+

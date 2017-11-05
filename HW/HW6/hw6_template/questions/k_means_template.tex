@@ -1,0 +1,83 @@
+\section{K-Means \hpoints{23}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Given a set of points $\mathbf{x}_1, \dots, \mathbf{x}_n$, recall that the objective of $K$-means clustering is to minimize within-class sum of squares
+\begin{equation*}
+  \label{eq:kmeans-model}
+	J(\mu,r) = \sum_{i=1}^n\sum_{k=1}^K r_{ik} ||\mu_k-\mathbf{x}_i||^2_2
+  \end{equation*}
+where $\mu_1,\ldots,\mu_K$ are the centroids of the clusters and $r_{ik}$ are binary variables indicating whether data point $\mathbf{x}_i$ belongs to cluster $k$. 
+
+The optimization is NP-hard. Instead, as described in class, 
+the following greedy iterative clustering algorithm is used to alternatively update $\mu_k$ and $r_{ik}$ to optimize $J(\mu,r)$:
+\begin{itemize}
+ \item Initialize $K$ cluster centroids at random
+ \item  Alternate until convergence:
+\begin{itemize}
+  \item  Assignment step: Assign points to the nearest centroid\\
+\begin{equation*}
+\arg \min_r J(\mu,r) \rightarrow r_{ik} = \textbf{1}(k = \arg \min_{k'} ||\mu_{k'} - \mathbf{x}_i||_2^2)
+ \end{equation*}
+ 
+  \item  Update step: Set the centroid to be the mean of the points assigned to it\\
+  \begin{equation*}
+ \arg \min_\mu J(\mu,r) \rightarrow \mu_k = \frac{\sum_i r_{ik} \mathbf{x}_i}{\sum_i r_{ik}}
+  \end{equation*}
+  \end{itemize}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{enumerate}
+\item \points{3} The greedy iterative clustering algorithm converges when the assignments no longer change. Is the algorithm guaranteed to converge in a finite number of steps? Briefly explain why or why not.\\
+{\em Hint: Think about the total possible number of assignments and the trend of the objective function after each iteration.}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item \points{20} Consider the toy 2D dataset in the following
+  Figure~\ref{fig:kmeans_a} and Figure \ref{fig:kmeans_b}. We set $K = 3$ in this problem. The $*$ marker indicates the
+  data points and the colored markers (blue circle, green triangle and red square) indicate the 3 starting cluster centroids. 
+  Notice that we have a slight different initiation from part $(a)$ to part $(b)$, but it might converge to very different results. 
+  For both cases, show the update step and assignment step for each iteration until the algorithm converges. 
+  You can use as many of the blank figures (Figure$~\ref{fig:kmeans_blank}$) provided as you need.
+
+Please note that the first update step is given as the
+initialization. For each iteration, use one figure to mark the updated
+centroids based on the assignment from last iteration, then indicate the data point assignment based on the updated centroid. We expect you to
+understand the detailed procedure of $K$-means. You should be able to
+compute the centroids manually with a calculator and assign data
+points with geometric intuition. Please be sure to show the
+coordinates of each centroid in every iteration.
+
+What to hand in? You can
+\begin{itemize}
+\item \textit{scan:} use your phone or a scanner to take the image with your circle
+and include it in the .pdf you hand in, or
+\item \textit{write on pdf:} use a pdf tool like adobe acrobat to write directly on the pdf, or
+\item \textit{use MATLAB:} run a MATLAB program, and just hand in the outputs at each iteration with the centroids and the list of points in each cluster (but you should see graphically what is happening).
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{images/k-means_0}
+	\caption{Part (a): Dataset with first initialization for K-means.}
+	\label{fig:kmeans_a}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{images/k-means_20}
+	\caption{Part (b): Dataset with second initialization for K-means.}
+	\label{fig:kmeans_b}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.6]{images/k-means_blank}
+  \caption{Blank dataset for you to implement K-means.}
+  \label{fig:kmeans_blank}
+\end{figure}
+
+\end{enumerate}
+
+
+
+  

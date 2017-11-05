@@ -12,8 +12,8 @@
 \usepackage{tikz,forest}
 \usepackage{multicol}
 \usepackage{enumitem}
-
-
+\usepackage{adjustbox}
+%\usepackage[demo]{graphicx}
 
 %
 % Basic Document Settings
@@ -90,11 +90,11 @@
 %   - Author
 %
 
-\newcommand{\hmwkTitle}{Problem Set\ \#3}
-\newcommand{\hmwkDueDate}{October 1, 2017}
+\newcommand{\hmwkTitle}{Problem Set\ \#4}
+\newcommand{\hmwkDueDate}{October 15, 2017}
 \newcommand{\hmwkClass}{CIS 520}
 %\newcommand{\hmwkClassTime}{Section A}
-\newcommand{\hmwkClassInstructor}{Lyle Ungar}
+\newcommand{\hmwkClassInstructor}{Lyle Ungar, Shivani Agarwal}
 \newcommand{\hmwkAuthorName}{Eric Oh}
 
 %
@@ -159,7 +159,7 @@ Convolutional Neural Network
 \item Using a filter of size $21 \times 14 \times 3$ results in $882$ weights for a single neuron. 
 \item The size of the output image from the Conv layer is 
 \begin{equation*} \frac{W-F+2P}{S}+1\end{equation*}
-where $W$ is the input volume size, $F$ is the size of the Conv layer filter, $P$ is the amount of zero padding on the border, and $S$ is the stride size. Thus, for a $105 \times 154$ input image, a $21 \times 14$ filter, 0 padding, and a stride of 7, the output image is $13 \times 21$, resulting in $819$ weights per neuron. 
+where $W$ is the input volume size, $F$ is the size of the Conv layer filter, $P$ is the amount of zero padding on the border, and $S$ is the stride size. Thus, for a $105 \times 154$ input image, a $21 \times 14$ filter, 0 padding, and a stride of 7, the output image is $13 \times 21$, resulting in $273$ neurons. 
 \item The first output of the $3 \times 3 \times 2$ output is given by applying the $3 \times 3 \times 1$ filter 1 to the input image with a stride of 1. The second is found by applying the $3 \times 3 \times 1$ filter 2 to the input image with a stride of 1. This results in an output of
 \[ \left( \begin{array}{ccc}
 0 & -2 & 0 \\
@@ -239,7 +239,7 @@ Note that the second derivatives are positive, indicating that they are indeed m
 \begin{align*}
 \frac{d\phi(\lambda)}{d\lambda} = \frac{4}{\lambda^2} + \frac{9}{4\lambda^2} - 1 \equiv 0 \hspace{0.2in} \Rightarrow \hspace{0.2in} \hat{\lambda} = \pm \frac{5}{2}
 \end{align*}
-Since $\hat{\lambda} = \frac{5}{2}$ is greater than 0, we have a solution to the constrained dual problem. Thus, a solution to the primal problem is given by $\hat{x}_1 =  -\frac{2}{2.5} = -0.8$ and $\hat{x}_2 = -\frac{3}{5} = -0.6$. This solution lies in the Euclidean ball of the primal constraint because $(-0.8)^2 + (-0.6)^2 = 0.923 \leq 1$. 
+Since $\hat{\lambda} = \frac{5}{2}$ is greater than 0, we have a solution to the constrained dual problem. Thus, a solution to the primal problem is given by $\hat{x}_1 =  -\frac{2}{2.5} = -0.8$ and $\hat{x}_2 = -\frac{3}{5} = -0.6$. This solution does not lie in the Euclidean ball of the primal constraint because $(-0.8)^2 + (-0.6)^2 = 1$, rather it lies on it. 
 \end{enumerate}
 \end{homeworkProblem}
 
@@ -257,7 +257,9 @@ Kernel Functions
 
 \item Let $\phi(x) = (\phi_1(x),\phi_2(x))$. Then
 \begin{align*}
-\phi(x)^T\phi(x') = (\phi_1(x),\phi_2(x))^T (\phi_1(x'),\phi_2(x')) = \phi_1^T(x)\phi_1(x') + \phi_2^T(x)\phi_2(x') = K_1(x,x')+K_2(x,x') = K(x,x')
+\phi(x)^T\phi(x') &= (\phi_1(x),\phi_2(x))^T (\phi_1(x'),\phi_2(x'))\\
+&= \phi_1^T(x)\phi_1(x') + \phi_2^T(x)\phi_2(x') \\
+&= K_1(x,x')+K_2(x,x') = K(x,x')
 \end{align*}
 
 \item A mapping $\phi$ cannot exist because dot products always sum elements. If either $\phi_1(x)$ or $\phi_2(x)$ were made to be negative, the dot product would then result in a summation. 
@@ -265,6 +267,319 @@ Kernel Functions
 \begin{align*}
 \phi(x)^T\phi(x') = \phi_1^T(f(x))\phi_1(f(x')) = K_1(f(x),f(x')) = K(x,x')
 \end{align*}
+\end{enumerate}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+
+SVM and Kernels
+
+\solution
+
+\begin{enumerate}
+
+\item 
+
+\begin{itemize}
+\item For $q=1$, the training decision boundary is shown in the plot below.
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_1.png}%
+}
+\medskip
+\end{minipage}
+\end{center}
+
+The testing decision boundary is shown below. 
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_1.png}%
+}
+\medskip
+\end{minipage}
+\end{center}
+
+\item For $q=2$, the training decision boundary is shown in the plot below.
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_2.png}%
+}
+\medskip
+\end{minipage}
+\end{center}
+
+The testing decision boundary is shown below. 
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_2.png}%
+}
+\medskip
+\end{minipage}
+\end{center}
+
+\item For $q=3$, the training decision boundary is shown in the plot below.
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_3.png}%
+}
+\medskip
+\end{minipage}
+\end{center}
+
+The testing decision boundary is shown below. 
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_3.png}%
+}
+\medskip
+\end{minipage}
+\end{center}
+
+\item For $q=4$, the training decision boundary is shown in the plot below.
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_4.png}%
+}
+\medskip
+\end{minipage}
+\end{center}
+
+The testing decision boundary is shown below. 
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_4.png}%
+}
+\medskip
+\end{minipage}
+\end{center}
+
+\item For $q=5$, the training decision boundary is shown in the plot below.
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_5.png}%
+}
+\medskip
+\end{minipage}
+\end{center}
+
+The testing decision boundary is shown below. 
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_5.png}%
+}
+\medskip
+\end{minipage}
+\end{center}
+
+\item The training and testing error achieved by each value of q is shown in the plot below. The value of q that achieves the lowest test error is $q=4$. 
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/ClassificationErr_degree.png}%
+}
+\medskip
+\end{minipage}
+\end{center}
+\end{itemize}
+
+\item 
+
+\begin{itemize}
+\item For $\sigma=0.01$, the training decision boundary is shown in the plot below.
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_001.png}%
+}
+\medskip
+\end{minipage}
+\end{center}
+
+The testing decision boundary is shown below. 
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_001.png}%
+}
+\medskip
+\end{minipage}
+\end{center}
+
+\item For $\sigma=1$, the training decision boundary is shown in the plot below.
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_1.png}%
+}
+\medskip
+\end{minipage}
+\end{center}
+
+The testing decision boundary is shown below. 
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_1.png}%
+}
+\medskip
+\end{minipage}
+\end{center}
+
+\item For $\sigma=10$, the training decision boundary is shown in the plot below.
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_10.png}%
+}
+\medskip
+\end{minipage}
+\end{center}
+
+The testing decision boundary is shown below. 
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_10.png}%
+}
+\medskip
+\end{minipage}
+\end{center}
+
+\item For $\sigma=100$, the training decision boundary is shown in the plot below.
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_100.png}%
+}
+\medskip
+\end{minipage}
+\end{center}
+
+The testing decision boundary is shown below. 
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_100.png}%
+}
+\medskip
+\end{minipage}
+\end{center}
+
+\item For $\sigma=1000$, the training decision boundary is shown in the plot below.
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_1000.png}%
+}
+\medskip
+\end{minipage}
+\end{center}
+
+The testing decision boundary is shown below. 
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_1000.png}%
+}
+\medskip
+\end{minipage}
+\end{center}
+
+\item The training and testing error achieved by each value of $\sigma$ is shown in the plot below. The value of $\sigma$ that achieves the lowest test error is $\sigma=1$ or $\sigma=10$ (equal). 
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/CV.png}%
+}
+\medskip
+\end{minipage}
+\end{center}
+\end{itemize}
+
+\item 
+
+\begin{itemize}
+
+\item The following plot shows the training, testing, and cross-validation errors for the polynomial kernel. The CV error shows that $q=4$ is the best kernel parameter, which corresponds to the lowest test error found in part 1. 
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/ClassificationErr_degree_CV.png}%
+}
+\medskip
+\end{minipage}
+\end{center}
+
+\item The following plot shows the training, testing, and cross-validation errors for the RBF kernel. The CV error shows that $\sigma=1$ is the best kernel parameter, which does correspond to the lowest test error found in part 2. This confirms that cross-validation is a great way to select the kernel parameters.   
+\begin{center}
+\begin{minipage}[t]{\linewidth}
+%\raggedright
+\centering
+\adjustbox{valign=t}{%
+\includegraphics[width=\linewidth]{hw4_release/SVM-problem/Plots/ClassificationErr_Sigma_CV.png}%
+}
+\medskip
+\end{minipage}
+\end{center} 
+\end{itemize}
+
+\item The test accuracy for the polynomial kernel was 0.95181 and 0.96386 for the RBF kernel. 
 \end{enumerate}
 \end{homeworkProblem}
 

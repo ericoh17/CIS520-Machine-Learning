@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  11 OCT 2017 22:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  15 OCT 2017 16:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -657,8 +657,58 @@ Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \enit@inbox=\box88
 \enitdp@description=\count150
 )
-\c@partCounter=\count151
-\c@homeworkProblemCounter=\count152
+(/usr/local/texlive/2015/texmf-dist/tex/latex/adjustbox/adjustbox.sty
+Package: adjustbox 2012/05/21 v1.0 Adjusting TeX boxes (trim, clip, ...)
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
+
+(/usr/local/texlive/2015/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/local/texlive/2015/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks50
+\XKV@tempa@toks=\toks51
+)
+\XKV@depth=\count151
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+(/usr/local/texlive/2015/texmf-dist/tex/latex/adjustbox/adjcalc.sty
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
+-ends (calc, etex, pgfmath)
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/adjustbox/trimclip.sty
+Package: trimclip 2012/05/16 v1.0 Trim and clip general TeX material
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/collectbox/collectbox.sty
+Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
+\collectedbox=\box89
+)
+\tc@llx=\dimen175
+\tc@lly=\dimen176
+\tc@urx=\dimen177
+\tc@ury=\dimen178
+Package trimclip Info: Using driver 'tc-pdftex.def'.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
+File: tc-pdftex.def 2012/05/13 v1.0 Clipping driver for pdftex
+))
+\adjbox@Width=\dimen179
+\adjbox@Height=\dimen180
+\adjbox@Depth=\dimen181
+\adjbox@Totalheight=\dimen182
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+Package: ifoddpage 2011/09/13 v1.0 Conditionals for odd/even page detection
+\c@checkoddpage=\count152
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/varwidth/varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box90
+\sift@deathcycles=\count153
+\@vwid@loff=\dimen183
+\@vwid@roff=\dimen184
+))
+\c@partCounter=\count154
+\c@homeworkProblemCounter=\count155
 
 (./cis520_hw4.aux)
 \openout1 = `cis520_hw4.aux'.
@@ -678,17 +728,17 @@ LaTeX Font Info:    ... okay on input line 142.
  ABD: EveryShipout initializing macros
 (/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count153
-\scratchdimen=\dimen175
-\scratchbox=\box89
-\nofMPsegments=\count154
-\nofMParguments=\count155
-\everyMPshowfont=\toks50
-\MPscratchCnt=\count156
-\MPscratchDim=\dimen176
-\MPnumerator=\count157
-\makeMPintoPDFobject=\count158
-\everyMPtoPDFconversion=\toks51
+\scratchcounter=\count156
+\scratchdimen=\dimen185
+\scratchbox=\box91
+\nofMPsegments=\count157
+\nofMParguments=\count158
+\everyMPshowfont=\toks52
+\MPscratchCnt=\count159
+\MPscratchDim=\dimen186
+\MPnumerator=\count160
+\makeMPintoPDFobject=\count161
+\everyMPtoPDFconversion=\toks53
 ) (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -748,36 +798,290 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 144.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
-Overfull \hbox (7.66557pt too wide) in paragraph at lines 261--261
-[] 
- []
+{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 284.
 
-[3] [4] (./cis520_hw4.aux) ) 
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 284.
+
+<hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_1.png, id=26, 421.57
+5pt x 316.0608pt>
+File: hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_1.png Graphic f
+ile (type png)
+
+<use hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_1.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/SVM_polynomial_train_deg
+ree_1.png used on input line 290.
+(pdftex.def)             Requested size: 422.75496pt x 316.95222pt.
+
+<hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_1.png, id=27, 421.575
+pt x 316.0608pt>
+File: hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_1.png Graphic fi
+le (type png)
+
+<use hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_1.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/SVM_polynomial_test_degr
+ee_1.png used on input line 302.
+(pdftex.def)             Requested size: 422.75496pt x 316.95222pt.
+ [4 <./hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_1.png (PNG cop
+y)>]
+<hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_2.png, id=31, 421.57
+5pt x 316.0608pt>
+File: hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_2.png Graphic f
+ile (type png)
+
+<use hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_2.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/SVM_polynomial_train_deg
+ree_2.png used on input line 314.
+(pdftex.def)             Requested size: 422.75496pt x 316.95222pt.
+ [5 <./hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_1.png (PNG copy
+)>]
+<hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_2.png, id=35, 421.575
+pt x 316.0608pt>
+File: hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_2.png Graphic fi
+le (type png)
+
+<use hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_2.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/SVM_polynomial_test_degr
+ee_2.png used on input line 326.
+(pdftex.def)             Requested size: 422.75496pt x 316.95222pt.
+ [6 <./hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_2.png (PNG cop
+y)>]
+<hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_3.png, id=39, 421.57
+5pt x 316.0608pt>
+File: hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_3.png Graphic f
+ile (type png)
+
+<use hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_3.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/SVM_polynomial_train_deg
+ree_3.png used on input line 338.
+(pdftex.def)             Requested size: 422.75496pt x 316.95222pt.
+ [7 <./hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_2.png (PNG copy
+)>]
+<hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_3.png, id=44, 421.575
+pt x 316.0608pt>
+File: hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_3.png Graphic fi
+le (type png)
+
+<use hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_3.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/SVM_polynomial_test_degr
+ee_3.png used on input line 350.
+(pdftex.def)             Requested size: 422.75496pt x 316.95222pt.
+ [8 <./hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_3.png (PNG cop
+y)>]
+<hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_4.png, id=48, 421.57
+5pt x 316.0608pt>
+File: hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_4.png Graphic f
+ile (type png)
+
+<use hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_4.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/SVM_polynomial_train_deg
+ree_4.png used on input line 362.
+(pdftex.def)             Requested size: 422.75496pt x 316.95222pt.
+ [9 <./hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_3.png (PNG copy
+)>]
+<hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_4.png, id=52, 421.575
+pt x 316.0608pt>
+File: hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_4.png Graphic fi
+le (type png)
+
+<use hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_4.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/SVM_polynomial_test_degr
+ee_4.png used on input line 374.
+(pdftex.def)             Requested size: 422.75496pt x 316.95222pt.
+ [10 <./hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_4.png (PNG co
+py)>]
+<hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_5.png, id=56, 421.57
+5pt x 316.0608pt>
+File: hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_5.png Graphic f
+ile (type png)
+
+<use hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_5.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/SVM_polynomial_train_deg
+ree_5.png used on input line 386.
+(pdftex.def)             Requested size: 422.75496pt x 316.95222pt.
+ [11 <./hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_4.png (PNG cop
+y)>]
+<hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_5.png, id=60, 421.575
+pt x 316.0608pt>
+File: hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_5.png Graphic fi
+le (type png)
+
+<use hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_5.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/SVM_polynomial_test_degr
+ee_5.png used on input line 398.
+(pdftex.def)             Requested size: 422.75496pt x 316.95222pt.
+ [12 <./hw4_release/SVM-problem/Plots/SVM_polynomial_train_degree_5.png (PNG co
+py)>]
+<hw4_release/SVM-problem/Plots/ClassificationErr_degree.png, id=64, 421.575pt x
+ 316.18124pt>
+File: hw4_release/SVM-problem/Plots/ClassificationErr_degree.png Graphic file (
+type png)
+ <use hw4_release/SVM-problem/Plots/ClassificationErr_degree.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/ClassificationErr_degree
+.png used on input line 410.
+(pdftex.def)             Requested size: 422.75496pt x 317.073pt.
+
+[13 <./hw4_release/SVM-problem/Plots/SVM_polynomial_test_degree_5.png (PNG copy
+)>]
+<hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_001.png, id=69, 418.6842pt x
+ 314.1336pt>
+File: hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_001.png Graphic file (t
+ype png)
+ <use hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_001.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_001.
+png used on input line 426.
+(pdftex.def)             Requested size: 422.75496pt x 317.20532pt.
+
+[14 <./hw4_release/SVM-problem/Plots/ClassificationErr_degree.png (PNG copy)>]
+<hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_001.png, id=73, 418.6842pt x 
+314.1336pt>
+File: hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_001.png Graphic file (ty
+pe png)
+ <use hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_001.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_001.p
+ng used on input line 438.
+(pdftex.def)             Requested size: 422.75496pt x 317.20532pt.
+
+[15 <./hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_001.png (PNG copy)>]
+<hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_1.png, id=77, 418.6842pt x 3
+14.1336pt>
+File: hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_1.png Graphic file (typ
+e png)
+ <use hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_1.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_1.pn
+g used on input line 450.
+(pdftex.def)             Requested size: 422.75496pt x 317.20532pt.
+
+[16 <./hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_001.png (PNG copy)>]
+<hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_1.png, id=81, 418.6842pt x 31
+4.1336pt>
+File: hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_1.png Graphic file (type
+ png)
+ <use hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_1.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_1.png
+ used on input line 462.
+(pdftex.def)             Requested size: 422.75496pt x 317.20532pt.
+ [17 <./hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_1.png (PNG copy)>]
+<hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_10.png, id=85, 418.6842pt x 
+314.1336pt>
+File: hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_10.png Graphic file (ty
+pe png)
+ <use hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_10.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_10.p
+ng used on input line 474.
+(pdftex.def)             Requested size: 422.75496pt x 317.20532pt.
+
+[18 <./hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_1.png (PNG copy)>]
+<hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_10.png, id=89, 418.6842pt x 3
+14.1336pt>
+File: hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_10.png Graphic file (typ
+e png)
+ <use hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_10.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_10.pn
+g used on input line 486.
+(pdftex.def)             Requested size: 422.75496pt x 317.20532pt.
+
+[19 <./hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_10.png (PNG copy)>]
+<hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_100.png, id=94, 418.6842pt x
+ 314.1336pt>
+File: hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_100.png Graphic file (t
+ype png)
+ <use hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_100.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_100.
+png used on input line 498.
+(pdftex.def)             Requested size: 422.75496pt x 317.20532pt.
+
+[20 <./hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_10.png (PNG copy)>]
+<hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_100.png, id=98, 418.6842pt x 
+314.1336pt>
+File: hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_100.png Graphic file (ty
+pe png)
+ <use hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_100.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_100.p
+ng used on input line 510.
+(pdftex.def)             Requested size: 422.75496pt x 317.20532pt.
+
+[21 <./hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_100.png (PNG copy)>]
+<hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_1000.png, id=102, 418.6842pt
+ x 314.1336pt>
+File: hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_1000.png Graphic file (
+type png)
+
+<use hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_1000.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_1000
+.png used on input line 522.
+(pdftex.def)             Requested size: 422.75496pt x 317.20532pt.
+ [22 <./hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_100.png (PNG copy)>]
+<hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_1000.png, id=106, 418.6842pt 
+x 314.1336pt>
+File: hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_1000.png Graphic file (t
+ype png)
+ <use hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_1000.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_1000.
+png used on input line 534.
+(pdftex.def)             Requested size: 422.75496pt x 317.20532pt.
+
+[23 <./hw4_release/SVM-problem/Plots/SVM_RBF_train_sigma_1000.png (PNG copy)>]
+<hw4_release/SVM-problem/Plots/CV.png, id=110, 578.16pt x 433.62pt>
+File: hw4_release/SVM-problem/Plots/CV.png Graphic file (type png)
+
+<use hw4_release/SVM-problem/Plots/CV.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/CV.png used on input lin
+e 546.
+(pdftex.def)             Requested size: 422.75496pt x 317.06267pt.
+ [24 <./hw4_release/SVM-problem/Plots/SVM_RBF_test_sigma_1000.png (PNG copy)>]
+<hw4_release/SVM-problem/Plots/ClassificationErr_degree_CV.png, id=114, 421.575
+pt x 316.18124pt>
+File: hw4_release/SVM-problem/Plots/ClassificationErr_degree_CV.png Graphic fil
+e (type png)
+
+<use hw4_release/SVM-problem/Plots/ClassificationErr_degree_CV.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/ClassificationErr_degree
+_CV.png used on input line 563.
+(pdftex.def)             Requested size: 422.75496pt x 317.073pt.
+ [25 <./hw4_release/SVM-problem/Plots/CV.png (PNG copy)>]
+<hw4_release/SVM-problem/Plots/ClassificationErr_Sigma_CV.png, id=119, 421.575p
+t x 316.18124pt>
+File: hw4_release/SVM-problem/Plots/ClassificationErr_Sigma_CV.png Graphic file
+ (type png)
+
+<use hw4_release/SVM-problem/Plots/ClassificationErr_Sigma_CV.png>
+Package pdftex.def Info: hw4_release/SVM-problem/Plots/ClassificationErr_Sigma_
+CV.png used on input line 575.
+(pdftex.def)             Requested size: 422.75496pt x 317.073pt.
+ [26 <./hw4_release/SVM-problem/Plots/ClassificationErr_degree_CV.png (PNG copy
+)>] [27 <./hw4_release/SVM-problem/Plots/ClassificationErr_Sigma_CV.png (PNG co
+py)>]
+(./cis520_hw4.aux) ) 
 Here is how much of TeX's memory you used:
- 18525 strings out of 493089
- 406001 string characters out of 6134842
- 483298 words of memory out of 5000000
- 21665 multiletter control sequences out of 15000+600000
+ 19386 strings out of 493089
+ 424934 string characters out of 6134842
+ 497314 words of memory out of 5000000
+ 22462 multiletter control sequences out of 15000+600000
  12456 words of font info for 48 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,12n,69p,834b,467s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmex10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr9.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmsy7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmti12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symb
-ols/msbm10.pfb>
-Output written on cis520_hw4.pdf (4 pages, 114109 bytes).
+ 55i,12n,69p,834b,574s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmex10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmmi10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmi7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r9.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
+0.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.
+pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.p
+fb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm
+10.pfb>
+Output written on cis520_hw4.pdf (27 pages, 1011842 bytes).
 PDF statistics:
- 64 PDF objects out of 1000 (max. 8388607)
- 46 compressed objects within 1 object stream
+ 162 PDF objects out of 1000 (max. 8388607)
+ 97 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 133 words of extra memory for PDF output out of 10000 (max. 10000000)
 

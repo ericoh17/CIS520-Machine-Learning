@@ -1,0 +1,101 @@
+\section{Loss-Based Performance Measures\hpoints{25}}
+%
+\begin{enumerate}
+\item
+\textbf{Binary classification with asymmetric costs.\hpoints{5}}
+
+Consider a binary classification problem in which the cost of a false positive is 10 and that of a false negative is 40, so that we have the following loss:
+%
+\vspace{-12pt}
+\begin{eqnarray*}
+& \rule{0.75cm}{0pt} \hat{y} 
+\\
+y &
+\begin{tabular}{@{}c|cc}
+ & $-1$ & $+1$ \\
+ \hline
+$-1$ & $0$ & $10$ \\[4pt]
+$+1$ & $40$ & $0$ \\
+\end{tabular}
+\end{eqnarray*}
+%
+Say you have learned a class probability estimation (CPE) model $\hat{\eta}:\X\>[0,1]$, which given an instance $x\in\X$, estimates the probability of $x$ having a true label $+1$.
+How would you use this to build a classification model $h:\X\>\{-1,+1\}$ for the above problem? Give your answer as a decision rule that explains when $h(x)$ should be $-1$ or $+1$ (as a function of $\hat{\eta}(x)$).
+\item
+\textbf{Binary classification with abstain option.\hpoints{10}}
+
+Consider a binary classification problem in which the classifier is allowed to `abstain' on instances it is not sure about (such instances could then be sent to a human expert to classify, with some associated cost). So here the true label $y$ can take 2 possible values, $-1$ and $+1$, while the predicted label $\hat{y}$ can take 3 possible values: $-1$, $+1$, and `?' (`abstain'). Suppose that the cost of misclassifying an instance is 1 as in the usual 0-1 loss, and that the cost of abstaining is $0.4$, so that we have the following loss:
+%
+%\vspace{-12pt}
+\begin{eqnarray*}
+& \rule{0.75cm}{0pt} \hat{y} 
+\\
+y &
+\begin{tabular}{@{}c|ccc}
+ & $-1$ & $+1$ & `?' \\
+ \hline
+$-1$ & $0$ & $1$ & $0.4$ \\[4pt]
+$+1$ & $1$ & $0$ & $0.4$ \\
+\end{tabular}
+\end{eqnarray*}
+%
+Say you have learned a class probability estimation (CPE) model $\hat{\eta}:\X\>[0,1]$, which given an instance $x\in\X$, estimates the probability of $x$ having a true label $+1$.
+How would you use this to build a classification model $h:\X\>\{-1,+1,\text{`?'} \}$ for the above problem? Give your answer as a decision rule that explains when $h(x)$ should be $-1$, $+1$, or `?' (as a function of $\hat{\eta}(x)$). Explain your derivation. 
+If the cost of abstaining changes from 0.4 to 0.2, how will your classification model change? Will it abstain more frequently or less frequently?
+%
+\item
+\textbf{Multiclass classification.\hpoints{10}}
+
+You are collaborating with a cancer treatment center and are trying to help them predict which patients will respond well to a particular cancer drug.
+You are given clinical data for patients they have given the drug to in the past; for each such patient, the data contains measurements from the patient's tumor biopsy together with a class label indicating whether the patient was a complete responder (CR) to the drug, a partial responder (PR), or a non-responder (NR).
+Your goal is to predict the response category (CR, PR, or NR) for new patients based on their tumor biopsy measurements.
+You are given the following loss for this problem:
+%
+\begin{center}
+\begin{tabular}{cc|ccc}
+\multicolumn{3}{c}{} & \multicolumn{2}{l}{$\hat{y}$} \\[2pt]
+ & & NR & PR & CR \\
+ \cline{2-5}
+ & NR & $0$ & $4$ & $5$ \\
+$y$ & PR & $9$ & $0$ & $1$ \\
+ & CR & $10$ & $1$ & $0$ \\
+\end{tabular}
+\end{center}
+%
+Here mis-predicting a PR case as CR or vice versa incurs relatively little cost, since in both cases the patient is given the drug. Mis-predicting a PR or CR case as NR is very costly, since in this case a patient who could benefit from the drug does not receive treatment. Mis-predicting an NR case as PR or CR is also costly, since it involves unnecessary expense and side effects for a patient who doesn't benefit from the drug, but is less costly than errors in the other direction. 
+
+Suppose that, using the training data provided to you, you have trained a CPE model, and that for 2 new patients with measurement vectors $x_1$ and $x_2$, the model estimates the following probabilities for the 3 classes:
+%
+%\begin{eqnarray*}
+\[
+\text{Patient 1:}~~ 
+\left( \begin{array}{l}
+	\hat{\eta}_{\text{NR}}(x_1) \\
+	\hat{\eta}_{\text{PR}}(x_1) \\
+	\hat{\eta}_{\text{CR}}(x_1) 
+\end{array} \right)
+	= 
+\left( \begin{array}{l}
+	0.6 \\
+	0.3 \\
+	0.1 
+\end{array} \right)
+	\,;
+	~~~~
+\text{Patient 2:}~~ 
+\left( \begin{array}{l}
+	\hat{\eta}_{\text{NR}}(x_2) \\
+	\hat{\eta}_{\text{PR}}(x_2) \\
+	\hat{\eta}_{\text{CR}}(x_2) 
+\end{array} \right)
+	= 
+\left( \begin{array}{l}
+	0.1 \\
+	0.3 \\
+	0.6 
+\end{array} \right)
+	\,.
+\]	
+Which response category would you predict for each patient, and how do these categories differ from what you would have predicted under the 0-1 loss? Explain your answers.	
+\end{enumerate}
+%
