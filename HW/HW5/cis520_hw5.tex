@@ -1,0 +1,336 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumerate}
+\usepackage{tikz,forest}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{bm}
+%\usepackage[demo]{graphicx}
+
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass : \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+\nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+\stepcounter{#1}
+\nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+\ifnum#1>0
+\setcounter{homeworkProblemCounter}{#1}
+\fi
+\section{Problem \arabic{homeworkProblemCounter}}
+\setcounter{partCounter}{1}
+\enterProblemHeader{homeworkProblemCounter}
+}{
+\exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Problem Set\ \#5}
+\newcommand{\hmwkDueDate}{October 30, 2017}
+\newcommand{\hmwkClass}{CIS 520}
+%\newcommand{\hmwkClassTime}{Section A}
+\newcommand{\hmwkClassInstructor}{Lyle Ungar, Shivani Agarwal}
+\newcommand{\hmwkAuthorName}{Eric Oh}
+
+%
+% Title Page
+%
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ }\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+\begin{center}
+{\normalsize \noindent Collaborators: Jiarui Lu} \\
+\end{center}
+\pagebreak
+
+\begin{homeworkProblem}
+
+Perceptron vs. Winnow
+
+\solution
+
+\begin{enumerate}[label=(\alph*)]
+
+\item Note that for this setting of sparse target vector \textbf{u} and dense feature vectors $\bm{x_t}$, 
+\begin{itemize}
+\item $R_{\infty} = 1$ 
+\item $\lVert \bm{u}\rVert_1 = k$
+\item $\lVert \bm{u}\rVert_2 = k^{\frac{1}{2}}$
+\item $\lVert \bm{x_t}\rVert_2 = d^{\frac{1}{2}} = R$
+\end{itemize}
+
+The respective error bounds are then given by
+\begin{itemize}
+\item Winnow : $\sum_{t=1}^T I(\hat{y}_t \neq y_t) \leq 2 \left(\frac{R^2_{\infty}\lVert \bm{u}\rVert_1^2}{\gamma^2}\right)\text{ln}(d) = 2\left(\frac{k^2}{\gamma^2}\right)\text{ln}(d)$
+\item Perceptron : $\sum_{t=1}^T I(\hat{y}_t \neq y_t) \leq \frac{R^2\lVert\bm{u}\rVert_2^2}{\gamma^2} = \frac{dk}{\gamma^2}$
+\end{itemize}
+
+Since $k \ll d$, the $d$ terms dominate in the error bounds. From them, $\text{ln}(d) < d$, meaning that the \textbf{Winnow} algorithm has a better error bound. 
+
+\item Note that for this setting of dense target vector \textbf{u} and sparse feature vectors $\bm{x_t}$, 
+\begin{itemize}
+\item $R_{\infty} = 1$ 
+\item $\lVert \bm{u}\rVert_1 = d$
+\item $\lVert \bm{u}\rVert_2 \leq 2\sqrt{d}$
+\item $\lVert \bm{x_t}\rVert_2 = k^{\frac{1}{2}} = R$
+\end{itemize}
+
+The respective error bounds are then given by
+\begin{itemize}
+\item Winnow : $\sum_{t=1}^T I(\hat{y}_t \neq y_t) \leq 2 \left(\frac{R^2_{\infty}\lVert \bm{u}\rVert_1^2}{\gamma^2}\right)\text{ln}(d) = 2\left(\frac{d^2}{\gamma^2}\right)\text{ln}(d)$
+\item Perceptron : $\sum_{t=1}^T I(\hat{y}_t \neq y_t) \leq \frac{R^2\lVert\bm{u}\rVert_2^2}{\gamma^2} \leq \frac{4kd}{\gamma^2}$
+\end{itemize}
+
+Since $k \ll d$, the $d$ terms dominate in the error bounds. From them, $d^2\text{ln}(d) > d$, meaning that that \textbf{Perceptron} algorithm has a better error bound. 
+
+\item If the problem has only non-negative features, the Winnow algorithm is not meaningful. This is because the weight updating is a multiplicative factor of exponentials, meaning that the weights will always be positive and since the features are all positive, the Winnow algorithm will always predict a positive label. 
+\end{enumerate}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+
+Multiclass Boosting
+
+\solution
+
+\begin{enumerate}[label=(\alph*)]
+
+\item 
+\begin{align*}
+D_{t+1}(i) &= \frac{D_t(i)\exp(-\alpha_t \widetilde{h}_{t,y_i}(x_i))}{Z_t} \\
+&= \frac{D_{t-1}(i)\exp(-\alpha_{t-1} \widetilde{h}_{t-1,y_i}(x_i))\exp(-\alpha_t \widetilde{h}_{t,y_i}(x_i))}{Z_t \times Z_{t-1}} \\
+&\vdots \\
+&= \frac{D_1(i)\sum_{t=1}^T\exp(-\alpha_t \widetilde{h}_{t,y_i}(x_i))}{\prod_{t=1}^T Z_t} \\
+&= \frac{\frac{1}{m}\exp(-F_{t,y_i}(x_i))}{\prod_{t=1}^T Z_t}
+\end{align*}
+
+\item 
+\begin{itemize}
+\item If $H(x_i) = y_i$, then it follows that $I(H(x_i)\neq y_i) = 0 \leq I(F_{t,y_t} \leq 0)$ by definition.  
+\item If $H(x_i) \neq y_i$, then it follows that $I(H(x_i) \neq y_i) = 1$. It remains to show that $F_{t,y_i} \leq 0$ must be true. To see this, note that $\sum_{k=1}^K F_{t,k}(x_i) = -(K-2)\sum_{t=1}^T\alpha_t \leq 0$ due to $\alpha_t \geq 0$ for all t. Then, take any two distinct $1 \leq a,b \leq K$ and consider $F_{t,a}(x_i)$ and $F_{t,b}(x_i)$. Consider the form of $\widetilde{h}_{t,k}(x_i)$. It is a vector that contains $+1$ in the predicted class for $x_i$ and is $-1$ in all other elements. Thus, $F_{t,a}(x_i) + F_{t,b}(x_i)$ is negative. Then it follows that since the sum over $K$ is negative, both $F_{t,a}(x_i)$ and $F_{t,b}(x_i)$ are negative as well. WLOG, let $y_i=a$, it then follows that $F_{t,y_i} \leq 0$ and the inequality follows.  
+\end{itemize}
+
+\item From (a), note that we can write
+\begin{align*}
+D_{t+1}\prod_{t=1}^T Z_t &= \frac{1}{m}\exp(-F_{t,y_t}(x_i)) \\
+\sum_{i=1}^m D_{t+1}\prod_{t=1}^T Z_t &= \frac{1}{m}\sum_{i=1}^m \exp(-F_{t,y_t}(x_i)) \\
+\prod_{t=1}^T Z_t &= \frac{1}{m}\sum_{i=1}^m \exp(-F_{t,y_t}(x_i)) \\
+\end{align*}
+where the last line follows from the sum of the weights being 1. Then it follows that
+\begin{align*}
+\text{er}_s[H] &= \frac{1}{m}\sum_{i=1}^m I(H(x_i) \neq y_i) \\
+&\leq \frac{1}{m} \sum_{i=1}^m I(F_{t,y_t}(x_i) \leq 0) \hspace{0.15in} \text{(from (b)} \\
+&\leq \frac{1}{m} \sum_{i=1}^m \exp(-F_{t,y_t}(x_i)) \\
+&= \prod_{t=1}^T Z_t 
+\end{align*}
+
+\item Note from the definition of $\alpha_t$, we can write
+\begin{align*}
+\exp(-\alpha_t) = \sqrt{\frac{\text{er}_t}{1-\text{er}_t}} \hspace{0.2in} \text{and} \hspace{0.2in} \exp(-\alpha_t) = \sqrt{\frac{1-\text{er}_t}{\text{er}_t}} 
+\end{align*}
+
+From the definition of $Z_t$, we have
+\begin{align*}
+Z_t &= \sum_{i=1}^m D_t(i)\exp(-\alpha_t \widetilde{h}_{t,y_i}(x_i)) \\
+&= \sum_{i=1}^m D_t(i) \left[\exp(-\alpha_t)I(h_t(x_i)=y_i)) + \exp(\alpha_t)I(h_t(x_i)\neq y_i))\right] \\
+&= \exp(-\alpha_t) \sum_{i=1}^m D_t(i)I(h_t(x_i)=y_i) + \exp(\alpha_t) \sum_{i=1}^m D_t(i)I(h_t(x_i) \neq y_i) \\
+&=  \sqrt{\frac{\text{er}_t}{1-\text{er}_t}} (1-\text{er}_t) +  \sqrt{\frac{1-\text{er}_t}{\text{er}_t}}(\text{er}_t) \\
+&= \sqrt{\text{er}_t(1-\text{er}_t)} + \sqrt{(1-\text{er}_t)\text{er}_t} \\
+&= 2\sqrt{\text{er}_t(1-\text{er}_t)}
+\end{align*}
+
+\item Assuming $\text{er}_t \leq \frac{1}{2}-\gamma$, we have
+\begin{align*}
+\text{er}_s[H] &\leq \prod_{t=1}^T Z_t \hspace{0.15in} \text{(from (c)} \\
+&= \prod_{t=1}^T 2\sqrt{\text{er}_t(1-\text{er}_t)} \hspace{0.15in} \text{(from (d)} \\
+&\leq 2^T \prod_{t=1}^T \sqrt{\left(\frac{1}{2}-\gamma\right)\left(\frac{1}{2}+\gamma\right)} \\
+&= 2^T \prod_{t=1}^T \frac{4}{4}\sqrt{\left(\frac{1}{4}-\gamma\right)^2} \\
+&= \prod_{t=1}^T \sqrt{1-4\gamma^2} \\
+&= (1-4\gamma^2)^{\frac{T}{2}} \\
+&\leq \exp(-2T\gamma^2)
+\end{align*}
+where the last line follows from $1-x \leq \exp(-x)$. 
+\end{enumerate}
+
+\end{homeworkProblem}
+
+
+\begin{homeworkProblem}
+
+Loss-Based Performance Measures
+
+\solution
+
+\begin{enumerate}
+
+\item $h(x)=\text{sign}(\hat{\eta}(x)-0.2) = 
+\left\{\begin{array}{lr}
++1 &\text{for } \hat{\eta}(x)>0.2 \\
+-1 &\text{otherwise}
+\end{array}\right\}$
+
+\item 
+\begin{itemize}
+\item Expected loss predicting $+1$ : $\eta(x)\cdot 0 + (1-\eta(x))\cdot 1 = 1-\eta(x)$
+\item Expected loss predicting $-1$ : $\eta(x)\cdot 1 + (1-\eta(x))\cdot 0 = \eta(x)$
+\item Expected loss abstaining : $\eta(x)\cdot 0.4 + (1-\eta(x))\cdot 0.4 = 0.4$. 
+\end{itemize}
+The expected loss for $+1$ is less than that of abstaining when $1-\eta(x) < 0.4$, or $\eta(x)>0.6$. The expected loss for $-1$ is less than that of abstaining when $\eta(x) < 0.4$. All other predicted values, we would abstain. Thus, our decision rule is given by $h(x)= 
+\left\{\begin{array}{lr}
++1 &\text{for } \hat{\eta}(x)>0.6 \\
+-1 &\text{for } \hat{\eta}(x)<0.4 \\
+\text{?} & \text{for } 0.4 \leq \hat{\eta}(x) \leq 0.6 
+\end{array}\right\}$
+If the cost of abstaining were to decrease to $0.2$, intuitively the likelihood of abstaining would increase. The decision rule is given below and matches our intuition. \\
+$h(x)= 
+\left\{\begin{array}{lr}
++1 &\text{for } \hat{\eta}(x)>0.8 \\
+-1 &\text{for } \hat{\eta}(x)<0.2 \\
+\text{?} & \text{for } 0.2 \leq \hat{\eta}(x) \leq 0.8 
+\end{array}\right\}$
+
+\item 
+\textbf{Patient 1}:
+\begin{itemize}
+\item Expected loss predicting NR : 0.6(0) + 0.3(9) + 0.1(10) = 3.7
+\item Expected loss predicting PR : 0.6(4) + 0.3(0) + 0.1(1) = 2.5
+\item Expected loss predicting CR : 0.6(5) + 0.3(1) + 0.1(0) = 3.3
+\end{itemize}
+Thus, we would predict PR. \\
+\textbf{Patient 2}:
+\begin{itemize}
+\item Expected loss predicting NR : 0.1(0) + 0.3(9) + 0.6(10) = 8.7
+\item Expected loss predicting PR : 0.1(4) + 0.3(0) + 0.6(1) = 1
+\item Expected loss predicting CR : 0.1(5) + 0.3(1) + 0.6(0) = 0.8
+\end{itemize}
+Thus, we would predict CR.\\
+\\
+Under 0-1 loss, we would predict the label with the highest probability: NR for patient 1 and CR for patient 2. 
+\end{enumerate}
+\end{homeworkProblem}
+
+
+
+\begin{homeworkProblem}
+
+Learning Theory
+
+\solution
+
+\begin{enumerate}
+\item (c) - generalization error
+\item (b) - test error ; (c) - cross-validation error 
+\item (a) - obtaining high confidence bounds on generalization error ; (d) - model selection
+\item (b) - consistent for some data distributions
+\item (b) SVM with RBF kernel and suitably chosen C parameter; (c) Linear logistic regression with $L_2$ regularization and suitably chosen $\lambda$ parameter; (d) - Logistic regression with RBF kernel, RKHS regularization, and suitably chosen $\lambda$ parameter
+\end{enumerate}
+\end{homeworkProblem}
+
+\end{document}

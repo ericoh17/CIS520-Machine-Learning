@@ -1,0 +1,383 @@
+%\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[letterpaper]{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+\usepackage{babel}
+\usepackage{capt-of}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{latexsym}
+\usepackage{xspace}
+\usepackage{pdflscape}
+\usepackage[hyphens]{url}
+\usepackage[colorlinks]{hyperref}
+\usepackage{ifthen}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+\usepackage{algorithm2e}
+\usepackage{listings}
+\usepackage{fullpage}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{latexsym}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{url}
+\usepackage{enumerate}
+\usepackage{multirow}
+%%%% HW instructions / collaboration text
+
+\newcommand{\HWPoliciesmix}{
+\paragraph*{Instructions.} {\bf This homework contains two parts. Part A is written assignment and Part B is MATLAB programming assignment.}
+}
+
+\newcommand{\HWPolicies}{
+\paragraph*{Instructions.} 
+Please write up your responses to the following problems clearly and
+concisely. We encourage you to write up your responses using \LaTeX{};
+we have provided a \LaTeX{} template, available on Canvas, to
+make this easier. {\bf Submit your answers in PDF form to Canvas. We will not accept paper copies of the homework.}
+
+\paragraph*{Collaboration.} 
+You are allowed and encouraged to work together. You may discuss the
+homework to understand the problem and reach a solution in groups up
+to size {\bf two students.} However, {\em each student must write
+  down the solution independently, and without referring to written
+  notes from the joint session. {\bf In addition, each student must
+    write on the problem set the names of the people with whom you
+    collaborated.}} You must understand the solution well enough in
+order to reconstruct it by yourself. (This is for your own benefit:
+you have to take the exams alone.)
+}
+
+\newcommand{\HWPoliciesNew}[1]{
+\paragraph*{For Problems 1-4} 
+
+\begin{itemize}
+\item \textbf{Instructions.} 
+Please write up your responses to the following problems clearly and
+concisely. We encourage you to write up your responses using \LaTeX{};
+we have provided a \LaTeX{} template, available on Canvas, to
+make this easier. {\bf Submit your answers in PDF form to Canvas. We will not accept paper copies of the homework.} 
+
+\item \textbf{Collaboration Policy.} 
+You are allowed and encouraged to work together. You may discuss the
+homework to understand the problem and reach a solution in groups up
+to size {\bf two students.} However, {\em each student must write
+  down the solution independently, and without referring to written
+  notes from the joint session. {\bf In addition, each student must
+    write on the problem set the names of the people with whom you
+    collaborated.}} You must understand the solution well enough in
+order to reconstruct it by yourself. (This is for your own benefit:
+you have to take the exams alone.)
+
+\end{itemize}
+
+\paragraph*{For Problem 5} 
+
+
+\begin{itemize}
+
+\item
+\textbf{Instructions.} 
+This is a MATLAB programming problem. You can submit your code to be automatically checked for
+correctness to receive feedback ahead of time.
+
+We are providing you with codebase / templates / dataset that you will
+require for this problem. Download the file {\tt hw#1\_kit.zip}
+from Canvas {\bf before} beginning the assignment.  {\bf Please
+  read through the documentation provided in ALL Matlab files before
+  starting the assignment.} The instructions for submitting your
+homeworks and receiving automatic feedback are online on the wiki:
+
+\begin{center}
+\url{http://alliance.seas.upenn.edu/~cis520/wiki/index.php?n=Resources.HomeworkSubmission}
+\end{center}
+
+If you are not familiar with Matlab or how Matlab functions work, you can refer to Matlab online documentation for help:
+\begin{center}
+\url{http://www.mathworks.com/help/matlab/}
+\end{center}
+
+In addition, please use built-in Matlab functions rather than external library functions. Without proper reference to external library, auto-grader may fail even if your code runs perfectly on your local machine. Also, please DO NOT include data file in your submission.
+
+\item
+\textbf{Collaboration Policy.} 
+You are allowed and encouraged to work together. You may discuss the
+homework to understand the problem and reach a solution in groups up
+to size {\bf two students.} 
+You can write {\bf one copy} of solution code per group. However, each group member needs to submit plots separately (can be the same as your collaborator's) in the PDF submitted to canvas.
+For the autograder you need to submit {\bf one copy} of your code per group. Be sure to include {\bf your and your collaborator's} pennkey and name in the {\bf group.txt} file. {\bf We will be using automatic checking software to detect blatant copying of other groups' assignments, so,
+please, don't do it.}
+
+\end{itemize}
+
+}
+
+\newcommand{\ProgrammingPolicies}[1]{
+\paragraph*{Instructions.} 
+This is a MATLAB programming assignment. This assignment consists of
+multiple parts. Portions of each part will be graded automatically,
+and you can submit your code to be automatically checked for
+correctness to receive feedback ahead of time.
+
+We are providing you with codebase / templates / dataset that you will
+require for this assignment. Download the file {\tt hw#1\_kit.zip}
+from Canvas {\bf before} beginning the assignment.  {\bf Please
+  read through the documentation provided in ALL Matlab files before
+  starting the assignment.} The instructions for submitting your
+homeworks and receiving automatic feedback are online on the wiki:
+
+\begin{center}
+\url{http://alliance.seas.upenn.edu/~cis520/wiki/index.php?n=Resources.HomeworkSubmission}
+\end{center}
+
+If you are not familiar with Matlab or how Matlab functions work, you can refer to Matlab online documentation for help:
+\begin{center}
+\url{http://www.mathworks.com/help/matlab/}
+\end{center}
+
+In addition, please use built-in Matlab functions rather than external library functions. Without proper reference to external library, auto-grader may fail even if your code runs perfectly on your local machine. Also, please DO NOT include data file in your submission.
+
+\paragraph*{Collaboration.} 
+You are allowed and encouraged to work together. You may discuss the
+homework to understand the problem and reach a solution in groups up
+to size {\bf two students.} Please submit {\bf one copy} of your work. Be sure to include {\bf your and your collaborator's} pennkey and name in the {\bf group.txt} file. {\bf We will be using automatic checking software to detect blatant copying of other groups' assignments, so,
+please, don't do it.}
+}
+
+%%%% CUSTOM COMMANDS FOR FORMATTING EXAMS/HOMEWORKS
+\newcounter{section_points}[section]
+\newcounter{header_points}[section]
+\newcounter{total_points}
+
+\newcommand{\hpoints}[1]{
+  \setcounter{header_points}{#1}
+  \textbf{[#1 points]}
+}
+
+\newcommand{\points}[1]{
+  \addtocounter{section_points}{#1}
+  \addtocounter{total_points}{#1}
+  \textbf{[#1 
+    \ifthenelse{\equal{#1}{1}}
+    {point}{points}]}
+}
+
+\newcommand{\bpoints}[1]{
+  \textbf{[#1 
+    \ifthenelse{\equal{#1}{1}}
+    {point}{points}]}
+}
+
+
+\newcommand{\point}{\textbf{[1 point]}}
+
+\newboolean{ShowSolutions}
+\newcommand{\Mistake}[2]{
+  \ifthenelse{\boolean{ShowSolutions}}
+  {\paragraph{\bf $\blacksquare$ COMMON MISTAKE #1:} {\sf #2} \bigskip}
+  {}
+}
+
+\newcommand{\Solution}[2]{
+  \ifthenelse{\boolean{ShowSolutions}}
+    {
+      \paragraph{\bf $\bigstar $ SOLUTION:} { \sf
+        #1} \bigskip
+    }
+    { 
+      #2
+    } %} \vspace{1.5in}}
+}
+\newcommand{\out}[1]{}
+
+\newboolean{ShowPointsInfo}
+
+\newcommand{\PointStats}[0]{
+  \ifthenelse{\boolean{ShowPointsInfo}}
+  {
+    \begin{center}
+
+      \begin{tabular}{rl}
+        \hline
+        Stated Points: & \arabic{header_points} \\
+        Section Points: & \arabic{section_points} \\
+        Total Points So Far: & \arabic{total_points} \\
+        \hline 
+        \multicolumn{2}{c}{
+          
+          \ifthenelse{
+            \equal{\value{section_points}}{\value{header_points}}
+          }{CORRECT TOTAL}
+          {{\bf INCORRECT TOTAL}}
+          }
+          \\
+        \hline
+      \end{tabular}
+    \end{center}
+  }{}
+}
+
+\newcounter{blankcount}
+\newcommand{\myrepeat}[2] {
+\setcounter{blankcount}{1}
+\whiledo{\value{blankcount} < #1}{
+#2
+\addtocounter{blankcount}{1}
+}
+}
+
+\newcommand{\blank}[1]{\underline{\myrepeat{#1}{\qquad}}}
+
+
+
+%================================ PREAMBLE ==================================
+
+%--------- Packages -----------
+\usepackage{fullpage}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{latexsym}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{url}
+\usepackage{enumerate}
+\usepackage{multirow}
+
+%\usepackage{algorithm,algorithmic}
+
+%----------Spacing-------------
+%\setlength{\oddsidemargin}{0.25 in}
+%\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+%\setlength{\textwidth}{6.5 in}
+%\setlength{\textheight}{9.4 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+
+%----------Header--------------
+\newcommand{\assignment}[2]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{page}{1}
+   \noindent
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CIS 520 Machine Learning} \hfill {\it Due:} #2 }
+       \vspace{6mm}
+       \hbox to 6.28in { \hfill {\Large Homework #1} \hfill }
+       \vspace{6mm}
+       \hbox to 6.28in { \hfill }
+      \vspace{2mm}}
+   }
+   \end{center}
+   \markboth{CIS 520 Machine Learning, Fall 2017, HW #1}{CIS 520 Machine Learning, Fall 2017, HW #1}
+   \vspace*{4mm}
+}
+
+%--------Environments----------
+\theoremstyle{definition}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newenvironment{pf}{{\noindent\sc Proof. }}{\qed}
+\newenvironment{map}{\[\begin{array}{cccc}} {\end{array}\]}
+
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem{exmp}{Example}
+\newtheorem*{prob}{Problem}
+\newtheorem*{exer}{Exercise}
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+
+%---------Definitions----------
+\newcommand{\Fig}[1]{Figure~\ref{#1}}
+\newcommand{\Sec}[1]{Section~\ref{#1}}
+\newcommand{\Tab}[1]{Table~\ref{#1}}
+\newcommand{\Tabs}[2]{Tables~\ref{#1}--\ref{#2}}
+\newcommand{\Eqn}[1]{Eq.~(\ref{#1})}
+\newcommand{\Eqs}[2]{Eqs.~(\ref{#1}-\ref{#2})}
+\newcommand{\Lem}[1]{Lemma~\ref{#1}}
+\newcommand{\Thm}[1]{Theorem~\ref{#1}}
+\newcommand{\Cor}[1]{Corollary~\ref{#1}}
+\newcommand{\App}[1]{Appendix~\ref{#1}}
+\newcommand{\Def}[1]{Definition~\ref{#1}}
+%
+\renewcommand{\>}{{\rightarrow}}
+\renewcommand{\hat}{\widehat}
+\renewcommand{\tilde}{\widetilde}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\R}{{\mathbb R}}
+\newcommand{\Z}{{\mathbb Z}}
+\newcommand{\N}{{\mathbb N}}
+\renewcommand{\P}{{\mathbf P}}
+\newcommand{\E}{{\mathbf E}}
+\newcommand{\Var}{{\mathbf{Var}}}
+\newcommand{\I}{{\mathbf I}}
+\newcommand{\1}{{\mathbf 1}}
+\newcommand{\0}{{\mathbf 0}}
+\renewcommand{\H}{{\mathcal H}}
+\newcommand{\F}{{\mathcal F}}
+\newcommand{\G}{{\mathcal G}}
+\renewcommand{\L}{{\mathcal L}}
+\newcommand{\cN}{{\mathcal N}}
+\newcommand{\X}{{\mathcal X}}
+\newcommand{\Y}{{\mathcal Y}}
+\newcommand{\bX}{{\mathbf X}}
+\newcommand{\sign}{\textup{\textrm{sign}}}
+\newcommand{\er}{\textup{\textrm{er}}}
+\newcommand{\abs}{\textup{\textrm{abs}}}
+\newcommand{\sq}{\textup{\textrm{sq}}}
+\newcommand{\ord}{\textup{\textrm{ord}}}
+\newcommand{\zo}{\textup{\textrm{0-1}}}
+\newcommand{\hinge}{\textup{\textrm{hinge}}}
+\newcommand{\ramp}{\textup{\textrm{ramp}}}
+\newcommand{\mar}{\textup{\textrm{margin}}}
+\newcommand{\lin}{\textup{\textrm{lin}}}
+\newcommand{\poly}{\textup{\textrm{poly}}}
+\newcommand{\majority}{\textup{\textrm{majority}}}
+\newcommand{\maj}{\textup{\textrm{maj}}}
+\newcommand{\co}{\textup{\textrm{co}}}
+\newcommand{\agg}{\textup{\textrm{agg}}}
+\newcommand{\bad}{\textup{\textrm{bad}}}
+\newcommand{\EX}{\textup{\textrm{\textit{EX}}}}
+\newcommand{\GD}{\textup{\textrm{{GD}}}}
+\newcommand{\EG}{\textup{\textrm{{EG}}}}
+%\newcommand{\algorithm}{\textup{\textrm{{algorithm}}}}
+\newcommand{\VCdim}{\textup{\textrm{{VCdim}}}}
+\newcommand{\VCentropy}{\textup{\textrm{{VC-entropy}}}}
+\newcommand{\Pdim}{\textup{\textrm{{Pdim}}}}
+\newcommand{\fat}{\textup{\textrm{{fat}}}}
+\newcommand{\reject}{\textup{\textrm{{reject}}}}
+\newcommand{\rejectsf}{\textup{\textsf{{reject}}}}
+\renewcommand{\a}{{\mathbf a}}
+\renewcommand{\b}{{\mathbf b}}
+\newcommand{\x}{{\mathbf x}}
+\newcommand{\y}{{\mathbf y}}
+\newcommand{\w}{{\mathbf w}}
+\newcommand{\p}{{\mathbf p}}
+\newcommand{\q}{{\mathbf q}}
+\renewcommand{\r}{{\mathbf r}}
+\renewcommand{\u}{{\mathbf u}}
+\newcommand{\bloss}{{\boldsymbol \ell}}
+\newcommand{\balpha}{{\boldsymbol \alpha}}
+\newcommand{\bxi}{{\boldsymbol \xi}}
+\newcommand{\bpsi}{{\boldsymbol \psi}}
+\newcommand{\btau}{{\boldsymbol \tau}}
+
+
+
+
+

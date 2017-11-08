@@ -1,0 +1,42 @@
+\section{Semi-supervised learning \hpoints{16}}
+
+In this exercise, we will use the Optical Character Recognition (OCR) data set (47,000 samples).
+See \(\mathtt{ocr\_train.mat}\) which contains \(\mathtt{X\_train}\)  and \(\mathtt{Y\_train}\), and  \(\mathtt{ocr\_test.mat}\) which contains \(\mathtt{X\_test}\)  and \(\mathtt{Y\_test}\).
+Specifically, we will examine how a neural network auto-encoder and PCA affect the performance of a model. 
+We will compare the performance of logistic regression and k-means using new features obtained from PCA and auto-encoder.
+
+\begin{enumerate}
+\item \points{4} \textbf{PCA:}
+Use MATLAB function \(\mathtt{pcacov.m}\) on the covariance matrix of  \(\mathtt{X\_train}\) to train coefficients for each principle component. 
+See \(\mathtt{pca\_getpc.m}\) for details.
+For PCA, choose the number of principle components so as to keep 90\% reconstruction accuracy.
+How many principle components do we need in this case? 
+Use that many principle components for the rest of analysis. \\
+
+\textbf{Auto-encoders:}
+For unsupervised neural nets, which are also known as auto-encoders,
+instead of minimizing the error with respect to the ground truth, these models are trained to minimize the input reconstruction error (i.e. treating input as ground truth). 
+See \(\mathtt{rbm.m}\) for details of training an auto-encoder. 
+Auto-encoders can be viewed as models that learn a new non-linear feature representation. 
+That is, we can take the output of a hidden layer of a trained auto-encoder and use it as input features to a supervised learning method. 
+We will examine if auto-encoders can learn a good feature representation (by projecting the data set into a higher dimension) and help to improve the performance of a supervised model.
+
+
+\item \points{6} Now we will perform logistic regression on 3 different inputs:
+\begin{itemize}
+\item The original features (all 64 dimensions),
+\item The PCA-ed data, and 
+\item The auto-encoder outputs. 
+\end{itemize}
+
+To learn an auto-encoder on the original features, use \(\mathtt{rbm.m}\).
+To generate new features from the learned auto-encoder, use \(\mathtt{newFeature\_rbm.m}\).
+Write your code in \(\mathtt{test.m}\).
+
+You will do 26-way logistic regression (labels 1, 2, \dots 26) and use an \(L_0\) evaluation of the error (e.g. you get it right or get it wrong).  A useful MATLAB function for this is \(\mathtt{liblinear}\). See \(\mathtt{test.m}\) for an example.
+Compare the accuracy on the test set using three different inputs as described above. Compare the accuracy? What's your observation?
+
+
+\item \points{6} Repeat the steps using K-means, with K = 26, 50 respectively, run the code on original data, PCA-ed data and auto-encoder. Compare the accuracy on the test set, what are the accuracies? Also, compare the performance of K-means with that of logistic regression.
+
+\end{enumerate}
