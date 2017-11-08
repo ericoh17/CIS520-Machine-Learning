@@ -35,11 +35,15 @@ err_mat(:,1) = 1:nPC;
 
 for pcnum = 1:nPC 
   xhat = PCAscores(:,1:pcnum) * PCAloadings(:,1:pcnum)' ;
+  %xhat = bsxfun(@plus, xhat, mu) ;
   
-  diff = X_train - xhat ;
-  reconstruct_err = norm(diff, 'fro')^2 ; 
+  blah = X_train - xhat ;
+  reconstruct_err = norm(blah, 'fro')^2 ; 
+
+  %reconstruct_err = sqrt(sum(bsxfun(@minus, X_train, xhat).^2, 2)) ;
   
   err_mat(pcnum, 2) = reconstruct_err;
+  %err_mat(pcnum, 2) = mean(reconstruct_err) ;
 
 end
 

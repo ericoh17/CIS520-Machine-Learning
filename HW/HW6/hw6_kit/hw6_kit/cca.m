@@ -9,8 +9,8 @@ X = X_train ;
 Y = Y_train ;
 Z = (X.' * X)^(-0.5) * (X.' * Y) * (double(Y.') * double(Y))^(-0.5) ;
 
-[U, S, V] = svds(Z) ; 
-corr((X * U), (Y * V)) ;
+[U, S, V] = svd(Z) ; 
+corr((X * U(:,1)), (Y * V)) ;
 
 [PCAloadings, PCAscores, PCAvar] = pca(X) ;
 betaPCR = regress(Y, PCAscores(:,1)) ;
