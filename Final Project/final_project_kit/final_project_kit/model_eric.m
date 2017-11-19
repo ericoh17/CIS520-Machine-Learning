@@ -23,25 +23,10 @@ valid_numCol_zero = sum(X_validation_full~=0, 1) ;
 train_zeroFeat = sum(train_numCol_zero == 0) ;  % 440
 valid_zeroFeat = sum(valid_numCol_zero == 0) ;  % 1894
 
+%%% currently wrong, need to select features missing in both training and testing sets %%%
 % delete missing features (not sure if we want to do this)
-train_numCol_zero(:, ~any(train_numCol_zero, 1)) = [];
-valid_numCol_zero(:, ~any(valid_numCol_zero, 1)) = [];
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%% Autoencoder %%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Does not work without 0/1 features ; need separate neural network toolbox
-
-% train an autoencoder for potential dimension reduction
-addpath('./DL_toolbox/util','./DL_toolbox/NN','./DL_toolbox/DBN');
-
-% train autoencoder
-dbn = rbm(X_train_full) ;
-
-% learn new features
-[new_feat_rbm, new_feat_test_rbm] = newFeature_rbm(dbn, X_train_full, X_validation_full) ; 
+X_train_full(:, ~any(train_numCol_zero, 1)) = [];
+X_validation_full(:, ~any(valid_numCol_zero, 1)) = [];
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -89,11 +74,46 @@ for i=1:size(train_raw, 1)
     all_bigram = [all_bigram, bigram];  % very inefficient
 end
 
+tbl = tabulate(all_bigram) ; 
+
+freq = tbl(:,3) ; % get frequencies of each bigram
+freq = cell2mat(freq) ; 
+
+count = tbl(:,2) ; % get counts of each bigram
+count = cell2mat(count) ; 
+
+% find number of bigrams that occur more than once
+num_singlebigram = find(count > 1, 1); 
+
+% only extract the bigrams that occur more than once (at least twice)
 [words,~,idx] = unique(all_bigram(:)) ;
 bin_idx = hist(idx, unique(idx)) ;
 
 % probably need to clean up features before this is meaningful
 common_bigram = words(bin_idx > 1) ; 
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% Testing %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% multiclass logistic regression
+addpath('./liblinear');
+
+% run PCA
+[score_train, score_test, numpc] = pca_getpc(X_train_full, X_validation_full);
+
+% only keep PCs that give 90 percent reconstruction
+score_train = score_train(:,1:numpc) ;
+score_test = score_test(:,1:numpc) ;
+
+% run sparse logistic regression
+model = train(Y_train, sparse(score_train), ['-s 0', 'col']);
+[predicted_label] = predict(Y_test, sparse(X_test), model, ['-q', 'col']);
+
 
 
 
