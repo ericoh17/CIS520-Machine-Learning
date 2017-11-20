@@ -119,15 +119,14 @@ train_ind = setdiff(1:n,test_ind);
 
 train_feature = score_train(train_ind,:);
 train_label = Y_train(train_ind);
-test_feature = score_train(test_ind,:);
+test_feature = score_test(test_ind,:);
 test_label = Y_train(test_ind);
 
 % run sparse logistic regression
-model = train(train_label, sparse(train_feature), ['-s 0', 'col']);
-[predicted_label] = predict(test_label, sparse(test_feature), model, ['-q', 'col']);
+model = train(Y_train, sparse(score_train), ['-s 0', 'col']);
+[predicted_label] = predict(test_label, sparse(X_test), model, ['-q', 'col']);
+precision = 1 - sum(predicted_label~=Y_test) / length(Y_test);
 
-% calculate precision using given loss matrix
-precision = performance_measure(predicted_label,test_label);
 
 
 

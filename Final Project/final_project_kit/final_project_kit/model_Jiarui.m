@@ -1,14 +1,14 @@
 cd 'C:\Users\Jerry Lu\Dropbox\CIS 520\Final Project\final_project_kit\final_project_kit'
 addpath('C:\Users\Jerry Lu\Dropbox\CIS 520\Final Project\final_project_kit\final_project_kit\libsvm-3.22\libsvm-3.22\matlab')
-%% load data
+% load data
 load('train.mat')
 load('validation.mat')
 load('vocabulary.mat')
-%% transform sparse matrix to full matrix
+% transform sparse matrix to full matrix
 X_t = full(X_train_bag);
 X_v = full(X_validation_bag);
 
-%% cleaning
+% cleaning
 % stemming
 [n_t,~]=size(X_t);
 wordlist =  strings(1,length(vocabulary));
@@ -29,7 +29,7 @@ feature_id = find(freq_t>=50 & freq_t <= 2000);
 %creat feature
 X_select = X_t_new(:,feature_id);
 
-%% models: multistage
+% models: multistage
 % generate folds
 folds=make_partition(n_t,5);
 
