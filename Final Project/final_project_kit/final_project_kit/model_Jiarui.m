@@ -24,7 +24,7 @@ end
 
 % compute freq, pick one from 200 to 2000.
 freq_t = sum(X_t_new);
-feature_id = find(freq_t>=50 & freq_t <= 2000);
+feature_id = find(freq_t>=200 & freq_t <= 2000);
 
 %creat feature
 X_select = X_t_new(:,feature_id);
@@ -43,14 +43,48 @@ X_pca = score(:,1:100);
 % cross validation to learn model
 Y_train_strat = double((Y_train==1 | Y_train==3));
 [q_opt,C_opt,test_error]=svm_poly(folds,X_pca,Y_train_strat);
+Y_positive = Y_train(Y_train==1 | Y_train==3);
+X_positive = X_pca(Y_train==1 | Y_train==3,:);
+% SVM took to much time
 
-%second stage:
+%% k-means
+[n,~] = size(X_select);
+test_ind = find(folds==2);
+train_ind = setdiff(1:n,test_ind);
+        
+train_feature = X_select(train_ind,:);
+train_label = Y_train(train_ind);
+test_feature = X_select(test_ind,:);
+test_label = Y_train(test_ind);
+[precision] = k_means(train_feature,train_label,test_feature,test_label , 5);
+% CV-error = 1.3-1.4
+%% boosting
+addpath('C:\Users\Jerry Lu\Dropbox\CIS 520\Final Project\final_project_kit\final_project_kit\boosting')
+nbIterations = 1000;
+[n,~] = size(X_select);
+test_ind = find(folds==2);
+train_ind = setdiff(1:n,test_ind);
+        
+train_feature = X_select(train_ind,:);
+train_label = Y_train_strat(train_ind);
+train_label(train_label==0)=-1;
+test_feature = X_select(test_ind,:);
+test_label = Y_train_strat(test_ind);
+test_label(test_label==0)=-1;
 
+[classifiers, classifiersWeights] = adaBoostTrain(train_feature, train_label , nbIterations);
+preds = adaBoostPredict(test_feature, classifiers, classifiersWeights);
+error = computeError(preds, test_label);
 
-
-%make prediction
-params = horzcat('-c ' ,num2str(C_opt), ' -t 1 -g 1 -d ', num2str(q_opt)); 
-model = svmtrain(Y_train_strat, X_pca, params);
-[~, accuracy, ~] = svmpredict(test_label, test_feature, model);
+addpath('C:\Users\Jerry Lu\Dropbox\CIS 520\Final Project\final_project_kit\final_project_kit\boosting\prtools4.2.5\prtools')
+train_feature = X_select(train_ind,:);
+train_label = Y_train(train_ind);
+test_feature = X_select(test_ind,:);
+test_label = Y_train(test_ind);
+nbIterations = 10;
+[classifiers, classifiersWeights] = adaBoostM1Train(train_feature, train_label , nbIterations);
+y_pred = adaBoostM1Predict(test_feature, 5, classifiers, classifiersWeights);
+err = performance_measure(y_pred, test_label);
+%%
 
 
